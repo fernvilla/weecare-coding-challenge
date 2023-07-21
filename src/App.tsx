@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ItunesResponse } from './interfaces/itunes-response';
 import Layout from './components/Layout';
 import AlbumFeed from './components/AlbumFeed';
+import './styles/global.scss';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
