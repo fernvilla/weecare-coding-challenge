@@ -41,7 +41,11 @@ function App() {
     return <div>No data</div>;
   }
 
-  return <div>app</div>;
+  return (
+    <Layout>
+      <AlbumFeed albums={songData.feed.entry} />
+    </Layout>
+  );
 }
 
 export default App;
