@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { ItunesResponse } from './interfaces/itunes-response';
-import Layout from './components/Layout';
-import AlbumFeed from './components/AlbumFeed';
+import Layout from './components/layout/Layout';
+import AlbumFeed from './components/albumFeed/AlbumFeed';
 import './styles/global.scss';
+import Hero from './components/hero/Hero';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -44,6 +45,7 @@ function App() {
 
   return (
     <Layout>
+      <Hero albums={songData.feed.entry} />
       <AlbumFeed albums={songData.feed.entry} />
     </Layout>
   );

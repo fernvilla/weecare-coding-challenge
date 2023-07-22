@@ -1,0 +1,22 @@
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
