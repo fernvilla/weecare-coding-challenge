@@ -1,7 +1,8 @@
 .feedFilters {
   background-color: #ffffff;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   padding: 30px 40px;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 }
 
 .feedFilterHeader {
@@ -10,17 +11,23 @@
   margin-bottom: 20px;
 }
 
+.feedFilterSubheader {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
 .feedGenreFilters {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 .feedGenreOption {
   display: flex;
   background-color: #ffffff;
-  border: 1px solid #ececec;
+  outline: 1px solid #ececec;
   padding: 5px 10px;
   border-radius: 20px;
   cursor: pointer;
@@ -31,4 +38,41 @@
     background-color: #000000;
     color: #ffffff;
   }
+}
+
+.feedAlphanumericFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+  outline: 1px solid #ececec;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+
+.alphanumericOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 10px 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  flex: 0 0 20px;
+  // font-size: 10px;
+
+  &.selected,
+  &:hover {
+    background-color: #000000;
+    color: #ffffff;
+  }
+}
+
+.optionDivider {
+  color: #ececec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 2px;
 }

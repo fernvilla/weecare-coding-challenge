@@ -5,7 +5,7 @@ interface AlbumImageProps {
   image: string;
   label: string;
   removeHover?: boolean;
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
 }
 
 const AlbumImage = ({ image, label, removeHover, style }: AlbumImageProps) => {

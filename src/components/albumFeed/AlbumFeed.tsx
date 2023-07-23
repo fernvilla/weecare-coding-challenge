@@ -18,21 +18,38 @@ const AlbumFeed = ({ albums, onAlbumSelect }: AlbumFeedProps) => {
   const [filteredAlbums, setFilteredAlbums] = useState<Entry[]>(albums);
   const [showFilters, setShowFilters] = useState(false);
   const [selectedGenres, setSelectedGenres] = useState<CategoryAttributes['label'][]>([]);
+  const [selectedAlphabet, setSelectedAlphabet] = useState<string[]>([]);
 
   useEffect(() => {
-    if (!selectedGenres.length) {
+    if (!selectedGenres.length && !selectedAlphabet.length) {
       setFilteredAlbums(albums);
     } else {
       setFilteredAlbums(
+        // TODO: improve this
         albums.filter(album => {
           const genre = album.category.attributes.label;
+          const artist = album['im:artist'].label;
+          const albumName = album['im:name'].label;
 
-          return selectedGenres.includes(genre);
+          if (selectedGenres.length && selectedAlphabet.length) {
+            return (
+              selectedGenres.includes(genre) &&
+              (selectedAlphabet.includes(artist.charAt(0).toUpperCase()) ||
+                selectedAlphabet.includes(albumName.charAt(0).toUpperCase()))
+            );
+          }
+
+          return (
+            selectedGenres.includes(genre) ||
+            selectedAlphabet.includes(artist.charAt(0).toUpperCase()) ||
+            selectedAlphabet.includes(albumName.charAt(0).toUpperCase())
+          );
         })
       );
     }
-  }, [albums, selectedGenres]);
+  }, [albums, selectedAlphabet, selectedGenres]);
 
+  // TODO: improve this or add other data generated filters
   const filterOptions = albums.reduce<FilterOptions>(
     (acc, album) => {
       const genre = album.category.attributes.label;
@@ -54,19 +71,33 @@ const AlbumFeed = ({ albums, onAlbumSelect }: AlbumFeedProps) => {
     }
   };
 
+  const onAlphabetSelect = (alphabet: string) => {
+    if (selectedAlphabet.includes(alphabet)) {
+      setSelectedAlphabet(selectedAlphabet.filter(selectedAlphabet => selectedAlphabet !== alphabet));
+    } else {
+      setSelectedAlphabet([...selectedAlphabet, alphabet]);
+    }
+  };
+
   return (
     <div className={styles.feedContainer}>
       <div className={styles.feedTitle}>
         <h1>Top 100 Albums</h1>
 
         <div className={styles.feedActionsToggle} onClick={() => setShowFilters(showFilters => !showFilters)}>
-          <RiEqualizerFill />
+          <RiEqualizerFill color="#df3940" />
           <span>Filters</span>
         </div>
       </div>
 
       {showFilters && (
-        <AlbumFeedFilters filterOptions={filterOptions} onGenreSelect={onGenreSelect} selectedGenres={selectedGenres} />
+        <AlbumFeedFilters
+          filterOptions={filterOptions}
+          onGenreSelect={onGenreSelect}
+          selectedGenres={selectedGenres}
+          onAlphabetSelect={onAlphabetSelect}
+          selectedAlphabet={selectedAlphabet}
+        />
       )}
 
       <div className={styles.feed}>
