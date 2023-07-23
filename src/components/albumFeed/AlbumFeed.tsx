@@ -4,13 +4,14 @@ import styles from './AlbumFeed.module.scss';
 
 interface AlbumFeedProps {
   albums: Entry[];
+  onAlbumSelect: (album: Entry) => void;
 }
 
-const AlbumFeed = ({ albums }: AlbumFeedProps) => {
+const AlbumFeed = ({ albums, onAlbumSelect }: AlbumFeedProps) => {
   return (
     <div className={styles.feed}>
       {albums.map(album => (
-        <Album album={album} key={album.id.attributes['im:id']} />
+        <Album album={album} key={album.id.attributes['im:id']} onAlbumSelect={onAlbumSelect} />
       ))}
     </div>
   );

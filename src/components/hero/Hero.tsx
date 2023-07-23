@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Entry } from '../../interfaces/itunes-response';
 import { generateRandomArrayItems } from '../../utils/arrays';
 import { generateImageWithSizeFromUrl } from '../../utils/images';
@@ -9,7 +10,8 @@ interface HeroProps {
 
 const Hero = ({ albums }: HeroProps) => {
   // Grab 3 random albums from the list to display on the hero
-  const randomAlbums = generateRandomArrayItems(albums, 3);
+  // Prevent re-rendering of the random albums by using useMemo
+  const randomAlbums = useMemo(() => generateRandomArrayItems(albums, 3), [albums]);
   const randomAlbumsImages = randomAlbums.map(album => generateImageWithSizeFromUrl(album['im:image'][0].label, 600));
 
   const onButtonClick = () => {
@@ -27,8 +29,9 @@ const Hero = ({ albums }: HeroProps) => {
                 src={image}
                 className={styles.heroImage}
                 alt="hero image"
-                style={{ width: 200 + i * 25, position: 'absolute', right: i * 20 + 20, zIndex: i }}
-                key={i}
+                // Increase the width of each image by 25px and the right position by 40px
+                style={{ width: 250 + i * 25, position: 'absolute', right: i * 40, zIndex: i }}
+                key={image}
               />
             ))}
           </div>

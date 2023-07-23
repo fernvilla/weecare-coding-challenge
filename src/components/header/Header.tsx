@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <nav className={styles.header}>
       <div className={styles.headerLogo}>
-        <RiAlbumFill size={20} />
+        <RiAlbumFill size={30} color="#df3940" />
         <span>WeeCare Music</span>
       </div>
     </nav>

@@ -11,18 +11,25 @@
   padding: 0 30px;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  // Offset hero image placement
-  margin-top: -20px;
+  flex-wrap: nowrap;
+  // Offset hero images top offset
+  margin-top: -30px;
 }
 
 .heroLeftColumn {
-  flex: 1 1 40%;
-  padding-right: 30px;
+  flex: 1 0 45%;
+  // Offset hero image right offset
+  padding-right: 60px;
 }
 
 .heroImage {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+    z-index: 10000;
+  }
 }
 
 .imagesContainer {
@@ -37,7 +44,7 @@
 }
 
 .heroRightColumn {
-  flex: 1 1 60%;
+  flex: 1 1 55%;
 }
 
 .heroTitle {

@@ -1,0 +1,16 @@
+.albumDetailsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.imageContainer {
+  flex: 0 1 350px;
+}
+
+.detailsContainer {
+  flex: 1;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

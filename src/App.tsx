@@ -1,14 +1,16 @@
+import './styles/global.scss';
 import { useEffect, useState } from 'react';
-import { ItunesResponse } from './interfaces/itunes-response';
+import { Entry, ItunesResponse } from './interfaces/itunes-response';
 import Layout from './components/layout/Layout';
 import AlbumFeed from './components/albumFeed/AlbumFeed';
-import './styles/global.scss';
 import Hero from './components/hero/Hero';
+import AlbumDetailsModal from './components/albumDetailsModal/AlbumDetailsModal';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [songData, setSongData] = useState<ItunesResponse>();
+  const [selectedAlbum, setSelectedAlbum] = useState<Entry | null>(null);
 
   useEffect(() => {
     const fetchSongData = async () => {
@@ -29,6 +31,10 @@ function App() {
     fetchSongData();
   }, []);
 
+  const handleAlbumSelect = (album: Entry) => {
+    setSelectedAlbum(album);
+  };
+
   // TODO: add loading spinner
   if (isLoading) {
     return <div>Loading...</div>;
@@ -46,7 +52,10 @@ function App() {
   return (
     <Layout>
       <Hero albums={songData.feed.entry} />
-      <AlbumFeed albums={songData.feed.entry} />
+      <AlbumFeed albums={songData.feed.entry} onAlbumSelect={handleAlbumSelect} />
+      {selectedAlbum && (
+        <AlbumDetailsModal album={selectedAlbum} onClose={() => setSelectedAlbum(null)} show={!!selectedAlbum} />
+      )}
     </Layout>
   );
 }
