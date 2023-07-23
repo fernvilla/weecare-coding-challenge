@@ -5,9 +5,10 @@ interface AlbumImageProps {
   image: string;
   label: string;
   removeHover?: boolean;
+  style: React.CSSProperties;
 }
 
-const AlbumImage = ({ image, label, removeHover }: AlbumImageProps) => {
+const AlbumImage = ({ image, label, removeHover, style }: AlbumImageProps) => {
   return (
     <img
       src={image}
@@ -15,6 +16,7 @@ const AlbumImage = ({ image, label, removeHover }: AlbumImageProps) => {
       className={clsx(styles.albumImage, {
         [styles.hoverable]: !removeHover
       })}
+      style={style}
     />
   );
 };

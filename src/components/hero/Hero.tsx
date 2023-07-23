@@ -2,6 +2,8 @@ import { useMemo } from 'react';
 import { Entry } from '../../interfaces/itunes-response';
 import { generateRandomArrayItems } from '../../utils/arrays';
 import { generateImageWithSizeFromUrl } from '../../utils/images';
+import AlbumImage from '../album/AlbumImage';
+
 import styles from './Hero.module.scss';
 
 interface HeroProps {
@@ -25,13 +27,13 @@ const Hero = ({ albums }: HeroProps) => {
         <div className={styles.heroLeftColumn}>
           <div className={styles.imagesContainer}>
             {randomAlbumsImages.map((image, i) => (
-              <img
-                src={image}
-                className={styles.heroImage}
-                alt="hero image"
+              <AlbumImage
+                image={image}
                 // Increase the width of each image by 25px and the right position by 40px
                 style={{ width: 250 + i * 25, position: 'absolute', right: i * 40, zIndex: i }}
+                label="Album image"
                 key={image}
+                removeHover
               />
             ))}
           </div>
