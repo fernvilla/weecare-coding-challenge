@@ -1,5 +1,7 @@
+@import '../../styles/_variables.scss';
+
 .button {
-  background-color: #df3940;
+  background-color: var(--color-red);
   color: #ffffff;
   border: none;
   border-radius: 500px;
@@ -10,7 +12,7 @@
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #c72c33;
+    opacity: 0.8;
   }
 }
 

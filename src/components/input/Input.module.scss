@@ -1,6 +1,8 @@
+@import '../../styles/_variables.scss';
+
 .input {
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--color-light-grey);
   padding: 8px;
   box-sizing: border-box;
   width: 100%;

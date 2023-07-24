@@ -1,3 +1,5 @@
+@import '../../styles/_variables.scss';
+
 .albumDetailsContainer {
   display: flex;
   flex-wrap: wrap;
@@ -13,7 +15,7 @@
   position: absolute;
   left: 0;
   top: 15px;
-  background-color: #df3940;
+  background-color: var(--color-red);
   color: #fff;
   padding: 10px 20px;
   border-bottom-right-radius: 10px;
