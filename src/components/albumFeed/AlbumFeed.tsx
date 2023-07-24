@@ -29,7 +29,6 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
     }
   }, [showFilters]);
 
-  // TODO: improve this (merge with other filters)
   useEffect(() => {
     if (!debouncedSearchTerm) {
       setFilteredAlbums(albums);
@@ -48,7 +47,6 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
     }
   }, [albums, debouncedSearchTerm]);
 
-  // TODO: improve this (merge with other filters)
   useEffect(() => {
     if (!selectedGenres.length && !selectedAlphabet.length) {
       setFilteredAlbums(albums);
@@ -76,9 +74,6 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
       );
     }
   }, [albums, selectedAlphabet, selectedGenres]);
-
-  // use Set to get unique values
-  const genreOptions = [...new Set(albums.map(album => album.category.attributes.label))];
 
   const onGenreSelect = (genre: CategoryAttributes['label']) => {
     if (selectedGenres.includes(genre)) {
@@ -114,7 +109,6 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
       {showFilters && (
         <div ref={scrollToRef}>
           <AlbumFeedFilters
-            genreOptions={genreOptions}
             onGenreSelect={onGenreSelect}
             selectedGenres={selectedGenres}
             onAlphabetSelect={onAlphabetSelect}
