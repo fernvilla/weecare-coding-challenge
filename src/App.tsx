@@ -5,6 +5,7 @@ import Layout from './components/layout/Layout';
 import AlbumFeed from './components/albumFeed/AlbumFeed';
 import Hero from './components/hero/Hero';
 import AlbumDetailsModal from './components/albumDetailsModal/AlbumDetailsModal';
+import LoadingIcon from './components/loadingIcon/LoadingIcon';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,18 +36,29 @@ function App() {
     setSelectedAlbum(album);
   };
 
-  // TODO: add loading spinner
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <Layout>
+        <LoadingIcon />
+      </Layout>
+    );
   }
 
-  // TODO: add error message ui
   if (error) {
-    return <div>{error}</div>;
+    return (
+      <Layout>
+        Error:
+        <pre className="texzt-center">{error}</pre>
+      </Layout>
+    );
   }
 
   if (!songData) {
-    return <div>No data</div>;
+    return (
+      <Layout>
+        <div className="text-center">No data</div>
+      </Layout>
+    );
   }
 
   return (

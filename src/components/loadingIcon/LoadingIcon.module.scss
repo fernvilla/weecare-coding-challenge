@@ -1,0 +1,22 @@
+.loadingIconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto;
+}
+
+.loadingIcon {
+  height: 48px;
+  width: 48px;
+  border-radius: 100%;
+  border-style: solid;
+  border-color: #c72c33;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
