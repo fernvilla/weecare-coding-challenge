@@ -24,7 +24,9 @@ const Modal = ({ show, onClose, children }: ModalProps) => {
       }
     };
 
+    // Handle click outside modal
     document.addEventListener('click', handleClickOutside, true);
+    // Handle escape key press
     document.addEventListener('keydown', handleEscape);
 
     return () => {
