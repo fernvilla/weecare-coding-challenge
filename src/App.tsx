@@ -48,7 +48,7 @@ function App() {
     return (
       <Layout>
         Error:
-        <pre className="texzt-center">{error}</pre>
+        <pre className="text-center">{error}</pre>
       </Layout>
     );
   }
