@@ -4,7 +4,7 @@
   margin: 40px auto;
 }
 
-.feedTitle {
+.feedTitleContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,6 +16,13 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   row-gap: 20px;
   column-gap: 30px;
+}
+
+.feedActionsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
 .feedActionsToggle {

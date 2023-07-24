@@ -1,0 +1,17 @@
+.albumSearchContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+
+  input {
+    padding-right: 15px;
+  }
+}
+
+.albumSearchToggle {
+  position: absolute;
+  right: 5px;
+  top: 8px;
+  color: #ccc;
+}

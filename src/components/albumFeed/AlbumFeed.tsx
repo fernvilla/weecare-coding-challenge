@@ -1,9 +1,12 @@
 import { RiEqualizerFill } from 'react-icons/ri';
 import { CategoryAttributes, Entry } from './../../interfaces/itunes-response';
 import Album from './../album/Album';
-import styles from './AlbumFeed.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import AlbumFeedFilters from './AlbumFeedFilters';
+import AlbumFeedSearch from './AlbumFeedSearch';
+import { useDebounce } from '../../hooks/useDebounce';
+
+import styles from './AlbumFeed.module.scss';
 
 interface AlbumFeedProps {
   albums: Entry[];
@@ -15,26 +18,46 @@ export interface FilterOptions {
 }
 
 const AlbumFeed = ({ albums, onAlbumSelect }: AlbumFeedProps) => {
+  const scrollToRef = useRef<HTMLDivElement>(null);
   const [filteredAlbums, setFilteredAlbums] = useState<Entry[]>(albums);
   const [showFilters, setShowFilters] = useState(false);
   const [selectedGenres, setSelectedGenres] = useState<CategoryAttributes['label'][]>([]);
   const [selectedAlphabet, setSelectedAlphabet] = useState<string[]>([]);
-  const scrollToRef = useRef<HTMLDivElement>(null);
-
-  console.log(albums);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const debouncedSearchTerm = useDebounce<string>(searchTerm, 500);
 
   useEffect(() => {
     if (showFilters && scrollToRef.current) {
+      // Scroll to the filters section when the filters are shown
       window.scrollTo({ top: scrollToRef.current.offsetTop - 20, behavior: 'smooth' });
     }
   }, [showFilters]);
 
+  // TODO: improve this (merge with other filters)
+  useEffect(() => {
+    if (!debouncedSearchTerm) {
+      setFilteredAlbums(albums);
+    } else {
+      setFilteredAlbums(
+        albums.filter(album => {
+          const artist = album['im:artist'].label;
+          const albumName = album['im:name'].label;
+
+          return (
+            artist.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+            albumName.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+          );
+        })
+      );
+    }
+  }, [albums, debouncedSearchTerm]);
+
+  // TODO: improve this (merge with other filters)
   useEffect(() => {
     if (!selectedGenres.length && !selectedAlphabet.length) {
       setFilteredAlbums(albums);
     } else {
       setFilteredAlbums(
-        // TODO: improve this
         albums.filter(album => {
           const genre = album.category.attributes.label;
           const artist = album['im:artist'].label;
@@ -90,12 +113,16 @@ const AlbumFeed = ({ albums, onAlbumSelect }: AlbumFeedProps) => {
 
   return (
     <div className={styles.feedContainer}>
-      <div className={styles.feedTitle}>
-        <h1>Top 100 Albums</h1>
+      <div className={styles.feedTitleContainer}>
+        <h2>Top 100 Albums</h2>
 
-        <div className={styles.feedActionsToggle} onClick={() => setShowFilters(showFilters => !showFilters)}>
-          <RiEqualizerFill color="#df3940" />
-          <span>Filters</span>
+        <div className={styles.feedActionsContainer}>
+          <AlbumFeedSearch onSearch={setSearchTerm} />
+
+          <div className={styles.feedActionsToggle} onClick={() => setShowFilters(showFilters => !showFilters)}>
+            <RiEqualizerFill color="#df3940" />
+            <span>Filters</span>
+          </div>
         </div>
       </div>
 
