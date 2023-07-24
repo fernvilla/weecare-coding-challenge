@@ -5,6 +5,7 @@ import { FilterOptions } from './AlbumFeed';
 import { generateAlphabet } from '../../utils/strings';
 
 import styles from './AlbumFeedFilters.module.scss';
+import { Fragment } from 'react';
 
 interface AlbumFeedFiltersProps {
   filterOptions: FilterOptions;
@@ -47,9 +48,8 @@ const AlbumFeedFilters = ({
 
       <div className={styles.feedAlphanumericFilters}>
         {generateAlphabet().map((letter, i, array) => (
-          <>
+          <Fragment key={letter}>
             <div
-              key={letter}
               className={clsx(styles.alphanumericOption, {
                 [styles.selected]: selectedAlphabet.includes(letter)
               })}
@@ -59,7 +59,7 @@ const AlbumFeedFilters = ({
             </div>
 
             {i < array.length - 1 && <div className={styles.optionDivider}>|</div>}
-          </>
+          </Fragment>
         ))}
       </div>
     </div>
