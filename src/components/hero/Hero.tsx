@@ -48,6 +48,8 @@ const Hero = ({ albums }: HeroProps) => {
             Discover, Stream, and Experience Music Like Never Before with our Cutting-Edge Music App!
           </p>
 
+          <p className={styles.heroTagline}>Listen to the Top 100 Albums on the Go.</p>
+
           <Button onClick={onButtonClick}>Get Started</Button>
         </div>
       </div>
