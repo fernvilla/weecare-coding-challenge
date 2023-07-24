@@ -66,8 +66,6 @@ const FavoritesAutoComplete = () => {
     }
   };
 
-  console.log({ selectedIndex });
-
   return (
     <div className={styles.autoCompleteContainer} ref={ref}>
       <Input onChange={e => setSearchTerm(e.target.value)} placeholder="Search Albums" onKeyDown={handleOnKeyDown} />
