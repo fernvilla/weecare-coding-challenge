@@ -2,7 +2,7 @@ import { RiEqualizerFill } from 'react-icons/ri';
 import { CategoryAttributes, Entry } from './../../interfaces/itunes-response';
 import Album from './../album/Album';
 import styles from './AlbumFeed.module.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import AlbumFeedFilters from './AlbumFeedFilters';
 
 interface AlbumFeedProps {
@@ -19,6 +19,15 @@ const AlbumFeed = ({ albums, onAlbumSelect }: AlbumFeedProps) => {
   const [showFilters, setShowFilters] = useState(false);
   const [selectedGenres, setSelectedGenres] = useState<CategoryAttributes['label'][]>([]);
   const [selectedAlphabet, setSelectedAlphabet] = useState<string[]>([]);
+  const scrollToRef = useRef<HTMLDivElement>(null);
+
+  console.log(albums);
+
+  useEffect(() => {
+    if (showFilters && scrollToRef.current) {
+      window.scrollTo({ top: scrollToRef.current.offsetTop - 20, behavior: 'smooth' });
+    }
+  }, [showFilters]);
 
   useEffect(() => {
     if (!selectedGenres.length && !selectedAlphabet.length) {
@@ -91,13 +100,15 @@ const AlbumFeed = ({ albums, onAlbumSelect }: AlbumFeedProps) => {
       </div>
 
       {showFilters && (
-        <AlbumFeedFilters
-          filterOptions={filterOptions}
-          onGenreSelect={onGenreSelect}
-          selectedGenres={selectedGenres}
-          onAlphabetSelect={onAlphabetSelect}
-          selectedAlphabet={selectedAlphabet}
-        />
+        <div ref={scrollToRef}>
+          <AlbumFeedFilters
+            filterOptions={filterOptions}
+            onGenreSelect={onGenreSelect}
+            selectedGenres={selectedGenres}
+            onAlphabetSelect={onAlphabetSelect}
+            selectedAlphabet={selectedAlphabet}
+          />
+        </div>
       )}
 
       <div className={styles.feed}>

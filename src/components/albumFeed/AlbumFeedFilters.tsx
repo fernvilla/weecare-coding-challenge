@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { CategoryAttributes } from '../../interfaces/itunes-response';
 import { FilterOptions } from './AlbumFeed';
-import { useRef } from 'react';
+
 import { generateAlphabet } from '../../utils/strings';
 
 import styles from './AlbumFeedFilters.module.scss';
@@ -21,16 +21,8 @@ const AlbumFeedFilters = ({
   selectedAlphabet,
   onAlphabetSelect
 }: AlbumFeedFiltersProps) => {
-  const scrollToRef = useRef<HTMLDivElement>(null);
-
-  const handleOnScroll = () => {
-    if (scrollToRef.current) {
-      window.scrollTo({ top: scrollToRef.current.offsetTop - 20, behavior: 'smooth' });
-    }
-  };
-
   return (
-    <div className={styles.feedFilters} ref={scrollToRef}>
+    <div className={styles.feedFilters}>
       {/* Genre/Category filter */}
       <div className={styles.feedFilterHeader}>By Genre</div>
 
@@ -41,10 +33,7 @@ const AlbumFeedFilters = ({
             className={clsx(styles.feedGenreOption, {
               [styles.selected]: selectedGenres.includes(genre)
             })}
-            onClick={() => {
-              handleOnScroll();
-              onGenreSelect(genre);
-            }}
+            onClick={() => onGenreSelect(genre)}
           >
             {genre}
           </div>
@@ -64,10 +53,7 @@ const AlbumFeedFilters = ({
               className={clsx(styles.alphanumericOption, {
                 [styles.selected]: selectedAlphabet.includes(letter)
               })}
-              onClick={() => {
-                handleOnScroll();
-                onAlphabetSelect(letter);
-              }}
+              onClick={() => onAlphabetSelect(letter)}
             >
               {letter}
             </div>

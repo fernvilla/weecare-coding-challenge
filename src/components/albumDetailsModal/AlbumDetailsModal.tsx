@@ -11,7 +11,6 @@ interface AlbumDetailsModalProps extends Omit<ModalProps, 'children'> {
 }
 
 const AlbumDetailsModal = ({ album, show, onClose }: AlbumDetailsModalProps) => {
-  console.log(album);
   const image = generateImageWithSizeFromUrl(album['im:image'][0].label, 600);
 
   return (
