@@ -1,3 +1,4 @@
+import Favorites from '../favorites/Favorites';
 import Footer from '../footer/Footer';
 import Header from './../header/Header';
 
@@ -7,11 +8,13 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <>
+    <div className="relative">
       <Header />
       <main>{children}</main>
       <Footer />
-    </>
+
+      <Favorites />
+    </div>
   );
 };
 

@@ -6,6 +6,7 @@ import AlbumFeed from './components/albumFeed/AlbumFeed';
 import Hero from './components/hero/Hero';
 import AlbumDetailsModal from './components/albumDetailsModal/AlbumDetailsModal';
 import LoadingIcon from './components/loadingIcon/LoadingIcon';
+import FavoritesProvider from './context/favoritesContext';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -62,13 +63,17 @@ function App() {
   }
 
   return (
-    <Layout>
-      <Hero albums={songData} />
-      <AlbumFeed albums={songData} onAlbumSelect={handleAlbumSelect} />
-      {selectedAlbum && (
-        <AlbumDetailsModal album={selectedAlbum} onClose={() => setSelectedAlbum(null)} show={!!selectedAlbum} />
-      )}
-    </Layout>
+    <FavoritesProvider>
+      <>
+        <Layout>
+          <Hero albums={songData} />
+          <AlbumFeed albums={songData} onAlbumSelect={handleAlbumSelect} />
+          {selectedAlbum && (
+            <AlbumDetailsModal album={selectedAlbum} onClose={() => setSelectedAlbum(null)} show={!!selectedAlbum} />
+          )}
+        </Layout>
+      </>
+    </FavoritesProvider>
   );
 }
 

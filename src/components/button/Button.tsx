@@ -8,16 +8,25 @@ interface ButtonProps {
   disabled?: boolean;
   children: React.ReactNode;
   fullWidth?: boolean;
+  isLink?: boolean;
 }
 
-const Button = ({ onClick, type = 'button', children, disabled = false, fullWidth = false }: ButtonProps) => {
+const Button = ({
+  onClick,
+  type = 'button',
+  children,
+  disabled = false,
+  fullWidth = false,
+  isLink = false
+}: ButtonProps) => {
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled}
       className={clsx(styles.button, {
-        [styles.fullWidth]: fullWidth
+        [styles.fullWidth]: fullWidth,
+        [styles.isLink]: isLink
       })}
     >
       {children}

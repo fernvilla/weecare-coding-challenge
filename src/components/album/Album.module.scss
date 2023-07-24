@@ -11,3 +11,14 @@
   font-size: 14px;
   margin-bottom: 5px;
 }
+
+.favoriteIcon {
+  position: relative;
+  bottom: -2px;
+  cursor: pointer;
+
+  &.favoriteIconActive,
+  &:hover {
+    color: var(--color-red);
+  }
+}

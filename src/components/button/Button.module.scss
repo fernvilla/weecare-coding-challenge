@@ -14,6 +14,12 @@
   &:hover {
     opacity: 0.8;
   }
+
+  &.isLink {
+    background-color: transparent;
+    color: var(--color-red);
+    font-weight: normal;
+  }
 }
 
 .fullWidth {
