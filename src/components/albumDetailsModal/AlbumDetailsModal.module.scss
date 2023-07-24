@@ -4,12 +4,28 @@
 }
 
 .imageContainer {
-  flex: 0 1 350px;
+  flex: 0 1 400px;
+  position: relative;
+  margin-bottom: -4px;
+}
+
+.albumPrice {
+  position: absolute;
+  left: 0;
+  top: 15px;
+  background-color: #df3940;
+  color: #fff;
+  padding: 10px 20px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow:
+    rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .detailsContainer {
   flex: 1;
-  padding: 0 20px;
+  padding: 20px 20px 10px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -17,4 +33,34 @@
 
 .ctaContainer {
   margin: 20px 0;
+}
+
+.albumName {
+  padding-right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.albumArtistName {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.albumReleaseDate {
+  font-size: 14px;
+}
+
+.albumCategory {
+  font-size: 14px;
+  background-color: #000;
+  color: #fff;
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin-top: 5px;
+}
+
+.albumLabel {
+  font-size: 12px;
 }

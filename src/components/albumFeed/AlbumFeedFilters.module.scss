@@ -43,7 +43,6 @@
 .feedAlphanumericFilters {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
   margin-bottom: 30px;
   outline: 1px solid #ececec;
   border-radius: 10px;
@@ -55,12 +54,11 @@
   align-items: center;
   justify-content: center;
   background-color: #ffffff;
-  padding: 10px 5px;
+  padding: 10px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-align: center;
-  flex: 0 0 20px;
-  // font-size: 10px;
+  flex: 1;
 
   &.selected,
   &:hover {
@@ -74,5 +72,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 0 0 2px;
+  // flex: 0 0 1px;
 }

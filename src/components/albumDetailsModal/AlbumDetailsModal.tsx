@@ -18,25 +18,26 @@ const AlbumDetailsModal = ({ album, show, onClose }: AlbumDetailsModalProps) => 
     <Modal show={show} onClose={onClose}>
       <div className={styles.albumDetailsContainer}>
         <div className={styles.imageContainer}>
+          <div className={styles.albumPrice}>{album['im:price'].label}</div>
           <AlbumImage image={image} label={album.title.label} removeHover />
         </div>
 
         <div className={styles.detailsContainer}>
           <div>
-            <div>
-              <h2>{album['im:name'].label}</h2>
-              <h3>{album['im:artist'].label}</h3>
-              <p>{formatDate(album['im:releaseDate'].label)}</p>
-            </div>
-
-            <div className={styles.ctaContainer}>
-              <a href={album.link.attributes.href} target="_blank" rel="noopener noreferrer">
-                <Button>View Album</Button>
-              </a>
-            </div>
+            <h2 className={styles.albumName}>{album['im:name'].label}</h2>
+            <h2 className={styles.albumArtistName}>{album['im:artist'].label}</h2>
+            <h3 className={styles.albumReleaseDate}>Released: {formatDate(album['im:releaseDate'].label)}</h3>
+            <h3 className={styles.albumCategory}>{album.category.attributes.label}</h3>
           </div>
 
-          <p>{album.rights.label}</p>
+          <div>
+            <div className={styles.ctaContainer}>
+              <a href={album.link.attributes.href} target="_blank" rel="noopener noreferrer">
+                <Button fullWidth>View Album</Button>
+              </a>
+            </div>
+            <p className={styles.albumLabel}>{album.rights.label}</p>
+          </div>
         </div>
       </div>
     </Modal>
