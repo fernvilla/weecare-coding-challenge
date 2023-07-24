@@ -10,7 +10,7 @@ import LoadingIcon from './components/loadingIcon/LoadingIcon';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [songData, setSongData] = useState<ItunesResponse>();
+  const [songData, setSongData] = useState<Entry[]>([]);
   const [selectedAlbum, setSelectedAlbum] = useState<Entry | null>(null);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function App() {
         const res = await fetch('https://itunes.apple.com/us/rss/topalbums/limit=100/json');
         const data = (await res.json()) as ItunesResponse;
 
-        setSongData(data);
+        setSongData(data.feed.entry);
       } catch (err: unknown) {
         const error = err as Error;
 
@@ -63,8 +63,8 @@ function App() {
 
   return (
     <Layout>
-      <Hero albums={songData.feed.entry} />
-      <AlbumFeed albums={songData.feed.entry} onAlbumSelect={handleAlbumSelect} />
+      <Hero albums={songData} />
+      <AlbumFeed albums={songData} onAlbumSelect={handleAlbumSelect} />
       {selectedAlbum && (
         <AlbumDetailsModal album={selectedAlbum} onClose={() => setSelectedAlbum(null)} show={!!selectedAlbum} />
       )}

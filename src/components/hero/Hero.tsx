@@ -6,7 +6,6 @@ import AlbumImage from '../album/AlbumImage';
 import Button from '../button/Button';
 
 import styles from './Hero.module.scss';
-import clsx from 'clsx';
 
 interface HeroProps {
   albums: Entry[];
@@ -43,7 +42,7 @@ const Hero = ({ albums }: HeroProps) => {
 
         {/* Right Column */}
         <div className={styles.heroRightColumn}>
-          <h1 className={clsx(styles.heroTitle, 'text-red')}>Harmonize Your World</h1>
+          <h1 className={styles.heroTitle}>Harmonize Your World</h1>
 
           <p className={styles.heroTagline}>
             Discover, Stream, and Experience Music Like Never Before with our Cutting-Edge Music App!
