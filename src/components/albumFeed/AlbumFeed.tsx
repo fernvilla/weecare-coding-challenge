@@ -18,7 +18,7 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
   const [filteredAlbums, setFilteredAlbums] = useState<AlbumEntry[]>(albums);
   const [showFilters, setShowFilters] = useState(false);
   const [selectedGenres, setSelectedGenres] = useState<CategoryAttributes['label'][]>([]);
-  const [selectedAlphabet, setSelectedAlphabet] = useState<string[]>([]);
+  const [selectedAlphanumeric, setSelectedAlphanumeric] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const debouncedSearchTerm = useDebounce<string>(searchTerm, 500);
 
@@ -48,7 +48,7 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
   }, [albums, debouncedSearchTerm]);
 
   useEffect(() => {
-    if (!selectedGenres.length && !selectedAlphabet.length) {
+    if (!selectedGenres.length && !selectedAlphanumeric.length) {
       setFilteredAlbums(albums);
     } else {
       setFilteredAlbums(
@@ -56,24 +56,36 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
           const genre = album.category.attributes.label;
           const artist = album['im:artist'].label;
           const albumName = album['im:name'].label;
+          const firstCharArtist = artist.charAt(0).toUpperCase();
+          const firstCharArtistIsNumber = !isNaN(parseInt(firstCharArtist));
+          const firstCharAlbumName = albumName.charAt(0).toUpperCase();
+          const firstCharAlbumNameIsNumber = !isNaN(parseInt(firstCharAlbumName));
 
-          if (selectedGenres.length && selectedAlphabet.length) {
+          if (selectedGenres.length && selectedAlphanumeric.length) {
+            if (selectedAlphanumeric.includes('1-9')) {
+              return selectedGenres.includes(genre) && (firstCharArtistIsNumber || firstCharAlbumNameIsNumber);
+            }
+
             return (
               selectedGenres.includes(genre) &&
-              (selectedAlphabet.includes(artist.charAt(0).toUpperCase()) ||
-                selectedAlphabet.includes(albumName.charAt(0).toUpperCase()))
+              (selectedAlphanumeric.includes(artist.charAt(0).toUpperCase()) ||
+                selectedAlphanumeric.includes(albumName.charAt(0).toUpperCase()))
             );
+          }
+
+          if (selectedAlphanumeric.includes('1-9')) {
+            return selectedGenres.includes(genre) || firstCharArtistIsNumber || firstCharAlbumNameIsNumber;
           }
 
           return (
             selectedGenres.includes(genre) ||
-            selectedAlphabet.includes(artist.charAt(0).toUpperCase()) ||
-            selectedAlphabet.includes(albumName.charAt(0).toUpperCase())
+            selectedAlphanumeric.includes(artist.charAt(0).toUpperCase()) ||
+            selectedAlphanumeric.includes(albumName.charAt(0).toUpperCase())
           );
         })
       );
     }
-  }, [albums, selectedAlphabet, selectedGenres]);
+  }, [albums, selectedAlphanumeric, selectedGenres]);
 
   const onGenreSelect = (genre: CategoryAttributes['label']) => {
     if (selectedGenres.includes(genre)) {
@@ -83,11 +95,11 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
     }
   };
 
-  const onAlphabetSelect = (alphabet: string) => {
-    if (selectedAlphabet.includes(alphabet)) {
-      setSelectedAlphabet(selectedAlphabet.filter(selectedAlphabet => selectedAlphabet !== alphabet));
+  const onAlphanumericSelect = (alphabet: string) => {
+    if (selectedAlphanumeric.includes(alphabet)) {
+      setSelectedAlphanumeric(selectedAlphanumeric.filter(selectedAlphanumeric => selectedAlphanumeric !== alphabet));
     } else {
-      setSelectedAlphabet([...selectedAlphabet, alphabet]);
+      setSelectedAlphanumeric([...selectedAlphanumeric, alphabet]);
     }
   };
 
@@ -111,8 +123,8 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
           <AlbumFeedFilters
             onGenreSelect={onGenreSelect}
             selectedGenres={selectedGenres}
-            onAlphabetSelect={onAlphabetSelect}
-            selectedAlphabet={selectedAlphabet}
+            onAlphanumericSelect={onAlphanumericSelect}
+            selectedAlphanumeric={selectedAlphanumeric}
           />
         </div>
       )}

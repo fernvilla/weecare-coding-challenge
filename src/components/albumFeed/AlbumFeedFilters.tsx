@@ -9,18 +9,19 @@ import styles from './AlbumFeedFilters.module.scss';
 interface AlbumFeedFiltersProps {
   onGenreSelect: (genre: CategoryAttributes['label']) => void;
   selectedGenres: CategoryAttributes['label'][];
-  onAlphabetSelect: (letter: string) => void;
-  selectedAlphabet: string[];
+  onAlphanumericSelect: (letter: string) => void;
+  selectedAlphanumeric: string[];
 }
 
 const AlbumFeedFilters = ({
   onGenreSelect,
   selectedGenres,
-  selectedAlphabet,
-  onAlphabetSelect
+  selectedAlphanumeric,
+  onAlphanumericSelect
 }: AlbumFeedFiltersProps) => {
   const { filterOptions } = useAlbums();
   const genreOptions = filterOptions.genres;
+  const alphanumericOptions = ['1-9', ...generateAlphabet()];
 
   return (
     <div className={styles.feedFilters}>
@@ -47,13 +48,13 @@ const AlbumFeedFilters = ({
       <div className={styles.feedFilterSubheader}>By Alphabet (Title/Artist)</div>
 
       <div className={styles.feedAlphanumericFilters}>
-        {generateAlphabet().map((letter, i, array) => (
+        {alphanumericOptions.map((letter, i, array) => (
           <Fragment key={letter}>
             <div
               className={clsx(styles.alphanumericOption, {
-                [styles.selected]: selectedAlphabet.includes(letter)
+                [styles.selected]: selectedAlphanumeric.includes(letter)
               })}
-              onClick={() => onAlphabetSelect(letter)}
+              onClick={() => onAlphanumericSelect(letter)}
             >
               {letter}
             </div>
