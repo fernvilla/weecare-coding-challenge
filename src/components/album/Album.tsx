@@ -1,5 +1,5 @@
 import { RiHeartFill, RiHeartLine } from 'react-icons/ri';
-import { Entry } from '../../interfaces/itunes-response';
+import { AlbumEntry } from '../../interfaces/itunes-response';
 import { generateImageWithSizeFromUrl } from '../../utils/images';
 import AlbumImage from './AlbumImage';
 import { useFavorites } from '../../hooks/useFavorites';
@@ -8,8 +8,8 @@ import clsx from 'clsx';
 import styles from './Album.module.scss';
 
 interface AlbumProps {
-  album: Entry;
-  onAlbumSelect: (album: Entry) => void;
+  album: AlbumEntry;
+  onAlbumSelect: (album: AlbumEntry) => void;
 }
 
 const Album = ({ album, onAlbumSelect }: AlbumProps) => {
@@ -18,7 +18,7 @@ const Album = ({ album, onAlbumSelect }: AlbumProps) => {
   const image = generateImageWithSizeFromUrl(album['im:image'][0].label, 500);
   const isFavorite = checkIfFavorite(album);
 
-  const handleOnFavoriteClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, album: Entry) => {
+  const handleOnFavoriteClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, album: AlbumEntry) => {
     e.stopPropagation();
     onFavoriteClick(album);
   };

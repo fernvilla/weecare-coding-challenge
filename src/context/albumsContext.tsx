@@ -1,12 +1,12 @@
 import { createContext, useEffect, useState } from 'react';
 import { AlbumsContextInterface } from '../interfaces/albums-context';
-import { Entry, ItunesResponse } from '../interfaces/itunes-response';
+import { AlbumEntry, ItunesResponse } from '../interfaces/itunes-response';
 
 export const AlbumsContext = createContext<AlbumsContextInterface | null>(null);
 
 const AlbumsProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [albums, setAlbums] = useState<Entry[]>([]);
+  const [albums, setAlbums] = useState<AlbumEntry[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import './styles/global.scss';
 import { useState } from 'react';
-import { Entry } from './interfaces/itunes-response';
+import { AlbumEntry } from './interfaces/itunes-response';
 import Layout from './components/layout/Layout';
 import AlbumFeed from './components/albumFeed/AlbumFeed';
 import Hero from './components/hero/Hero';
@@ -11,10 +11,10 @@ import AlbumsProvider from './context/albumsContext';
 import { useAlbums } from './hooks/useAlbums';
 
 function App() {
-  const [selectedAlbum, setSelectedAlbum] = useState<Entry | null>(null);
+  const [selectedAlbum, setSelectedAlbum] = useState<AlbumEntry | null>(null);
   const { error: loadingAlbumsError, isLoading: isLoadingAlbums } = useAlbums();
 
-  const handleAlbumSelect = (album: Entry) => {
+  const handleAlbumSelect = (album: AlbumEntry) => {
     setSelectedAlbum(album);
   };
 

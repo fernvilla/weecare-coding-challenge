@@ -1,6 +1,6 @@
-import { Entry } from './itunes-response';
+import { AlbumEntry } from './itunes-response';
 
-export interface FavoriteSong extends Entry {}
+export interface FavoriteSong extends AlbumEntry {}
 
 export interface FavoritesContextInterface {
   favorites: FavoriteSong[];

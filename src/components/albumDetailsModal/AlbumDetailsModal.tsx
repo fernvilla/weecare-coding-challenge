@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Entry } from '../../interfaces/itunes-response';
+import { AlbumEntry } from '../../interfaces/itunes-response';
 import { formatDate } from '../../utils/dates';
 import { generateImageWithSizeFromUrl } from '../../utils/images';
 import AlbumImage from '../album/AlbumImage';
@@ -13,7 +13,7 @@ import { millisToMinutesAndSeconds } from '../../utils/time';
 import styles from './AlbumDetailsModal.module.scss';
 
 interface AlbumDetailsModalProps extends Omit<ModalProps, 'children'> {
-  album: Entry;
+  album: AlbumEntry;
 }
 
 const AlbumDetailsModal = ({ album, show, onClose }: AlbumDetailsModalProps) => {

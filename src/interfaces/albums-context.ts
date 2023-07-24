@@ -1,7 +1,7 @@
-import { Entry } from './itunes-response';
+import { AlbumEntry } from './itunes-response';
 
 export interface AlbumsContextInterface {
-  albums: Entry[];
+  albums: AlbumEntry[];
   isLoading: boolean;
   error: string | null;
 }

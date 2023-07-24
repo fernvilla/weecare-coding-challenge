@@ -4,7 +4,7 @@ export interface ItunesResponse {
 
 export interface Feed {
   author: Author;
-  entry: Entry[];
+  entry: AlbumEntry[];
   updated: Icon;
   rights: Icon;
   title: Icon;
@@ -22,7 +22,7 @@ export interface Icon {
   label: string;
 }
 
-export interface Entry {
+export interface AlbumEntry {
   'im:name': Icon;
   'im:image': IMImage[];
   'im:itemCount': Icon;

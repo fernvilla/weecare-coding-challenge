@@ -3,6 +3,7 @@ import { useFavorites } from '../../hooks/useFavorites';
 import { generateImageWithSizeFromUrl } from '../../utils/images';
 import AlbumImage from '../album/AlbumImage';
 import Drawer from '../drawer/Drawer';
+import FavoritesAutoComplete from '../favoritesAutocomplete/FavoritesAutoComplete';
 
 import styles from './Favorites.module.scss';
 
@@ -13,8 +14,10 @@ const Favorites = () => {
     <Drawer open={showFavoritesDrawer} onClose={() => toggleFavoritesDrawer()}>
       <h2 className="text-bold">Favorites</h2>
 
+      <FavoritesAutoComplete />
+
       <div className={styles.favoritesList}>
-        {!favorites?.length && <p className="text-medium">No favorites added yet.</p>}
+        {!favorites?.length && <p className="text-medium">No favorites added yet. Search albums above.</p>}
 
         <div>
           {favorites?.map(album => {

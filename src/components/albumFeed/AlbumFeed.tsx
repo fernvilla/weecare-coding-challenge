@@ -1,5 +1,5 @@
 import { RiEqualizerFill } from 'react-icons/ri';
-import { CategoryAttributes, Entry } from './../../interfaces/itunes-response';
+import { CategoryAttributes, AlbumEntry } from './../../interfaces/itunes-response';
 import Album from './../album/Album';
 import { useEffect, useRef, useState } from 'react';
 import AlbumFeedFilters from './AlbumFeedFilters';
@@ -9,7 +9,7 @@ import { useAlbums } from '../../hooks/useAlbums';
 import styles from './AlbumFeed.module.scss';
 
 interface AlbumFeedProps {
-  onAlbumSelect: (album: Entry) => void;
+  onAlbumSelect: (album: AlbumEntry) => void;
 }
 
 export interface FilterOptions {
@@ -19,7 +19,7 @@ export interface FilterOptions {
 const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
   const { albums } = useAlbums();
   const scrollToRef = useRef<HTMLDivElement>(null);
-  const [filteredAlbums, setFilteredAlbums] = useState<Entry[]>(albums);
+  const [filteredAlbums, setFilteredAlbums] = useState<AlbumEntry[]>(albums);
   const [showFilters, setShowFilters] = useState(false);
   const [selectedGenres, setSelectedGenres] = useState<CategoryAttributes['label'][]>([]);
   const [selectedAlphabet, setSelectedAlphabet] = useState<string[]>([]);
