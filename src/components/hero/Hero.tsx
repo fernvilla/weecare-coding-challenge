@@ -1,17 +1,14 @@
 import { useMemo } from 'react';
-import { Entry } from '../../interfaces/itunes-response';
 import { generateRandomArrayItems } from '../../utils/arrays';
 import { generateImageWithSizeFromUrl } from '../../utils/images';
 import AlbumImage from '../album/AlbumImage';
 import Button from '../button/Button';
+import { useAlbums } from '../../hooks/useAlbums';
 
 import styles from './Hero.module.scss';
 
-interface HeroProps {
-  albums: Entry[];
-}
-
-const Hero = ({ albums }: HeroProps) => {
+const Hero = () => {
+  const { albums } = useAlbums();
   // Grab 3 random albums from the list to display on the hero
   // Prevent re-rendering of the random albums by using useMemo
   const randomAlbums = useMemo(() => generateRandomArrayItems(albums, 3), [albums]);

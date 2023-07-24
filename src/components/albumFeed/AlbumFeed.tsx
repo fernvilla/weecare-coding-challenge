@@ -5,11 +5,10 @@ import { useEffect, useRef, useState } from 'react';
 import AlbumFeedFilters from './AlbumFeedFilters';
 import AlbumFeedSearch from './AlbumFeedSearch';
 import { useDebounce } from '../../hooks/useDebounce';
-
+import { useAlbums } from '../../hooks/useAlbums';
 import styles from './AlbumFeed.module.scss';
 
 interface AlbumFeedProps {
-  albums: Entry[];
   onAlbumSelect: (album: Entry) => void;
 }
 
@@ -17,7 +16,8 @@ export interface FilterOptions {
   genres: CategoryAttributes['label'][];
 }
 
-const AlbumFeed = ({ albums, onAlbumSelect }: AlbumFeedProps) => {
+const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
+  const { albums } = useAlbums();
   const scrollToRef = useRef<HTMLDivElement>(null);
   const [filteredAlbums, setFilteredAlbums] = useState<Entry[]>(albums);
   const [showFilters, setShowFilters] = useState(false);
@@ -114,7 +114,7 @@ const AlbumFeed = ({ albums, onAlbumSelect }: AlbumFeedProps) => {
   return (
     <div className={styles.feedContainer}>
       <div className={styles.feedTitleContainer}>
-        <h2>Top 100 Albums</h2>
+        <h2>Top Albums</h2>
 
         <div className={styles.feedActionsContainer}>
           <AlbumFeedSearch onSearch={setSearchTerm} />

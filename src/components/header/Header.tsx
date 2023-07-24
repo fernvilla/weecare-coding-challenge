@@ -21,7 +21,7 @@ const Header = () => {
               View your Favorites <span className={styles.favoritesCount}>{favoritesCount}</span>
             </span>
           ) : (
-            <span>Add to Favorites</span>
+            <span>Add Favorites</span>
           )}
         </div>
       </Button>

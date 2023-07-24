@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { FavoriteSong, FavoritesContextInterface } from '../interfaces/favorite';
+import { FavoriteSong, FavoritesContextInterface } from '../interfaces/favorites-context';
 
 export const FavoritesContext = createContext<FavoritesContextInterface | null>(null);
 
