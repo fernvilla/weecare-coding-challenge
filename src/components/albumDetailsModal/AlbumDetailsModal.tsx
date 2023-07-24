@@ -78,10 +78,13 @@ const AlbumDetailsModal = ({ album, show, onClose }: AlbumDetailsModalProps) => 
               .map(song => (
                 <div className={styles.song}>
                   <RiMusicFill />
-                  {song.trackName}
-                  <span className={styles.songTime}>
-                    ({song.trackTimeMillis && millisToMinutesAndSeconds(song.trackTimeMillis)})
-                  </span>
+
+                  <div>
+                    {song.trackName}
+                    <span className={styles.songTime}>
+                      ({song.trackTimeMillis && millisToMinutesAndSeconds(song.trackTimeMillis)})
+                    </span>
+                  </div>
                 </div>
               ))}
           </div>
