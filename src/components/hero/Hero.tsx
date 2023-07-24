@@ -3,6 +3,7 @@ import { Entry } from '../../interfaces/itunes-response';
 import { generateRandomArrayItems } from '../../utils/arrays';
 import { generateImageWithSizeFromUrl } from '../../utils/images';
 import AlbumImage from '../album/AlbumImage';
+import Button from '../button/Button';
 
 import styles from './Hero.module.scss';
 
@@ -47,9 +48,7 @@ const Hero = ({ albums }: HeroProps) => {
             Discover, Stream, and Experience Music Like Never Before with our Cutting-Edge Music App!
           </p>
 
-          <button className={styles.heroButton} onClick={onButtonClick}>
-            Get Started
-          </button>
+          <Button onClick={onButtonClick}>Get Started</Button>
         </div>
       </div>
     </div>
