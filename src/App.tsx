@@ -17,7 +17,7 @@ function App() {
     const fetchSongData = async () => {
       try {
         const res = await fetch('https://itunes.apple.com/us/rss/topalbums/limit=100/json');
-        const data = await res.json();
+        const data = (await res.json()) as ItunesResponse;
 
         setSongData(data);
       } catch (err: unknown) {

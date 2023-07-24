@@ -1,5 +1,6 @@
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { useEffect, useRef } from 'react';
+
 import styles from './Modal.module.scss';
 
 export interface ModalProps {

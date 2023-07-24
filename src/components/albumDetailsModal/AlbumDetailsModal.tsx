@@ -1,11 +1,16 @@
+import { useEffect, useState } from 'react';
 import { Entry } from '../../interfaces/itunes-response';
 import { formatDate } from '../../utils/dates';
 import { generateImageWithSizeFromUrl } from '../../utils/images';
 import AlbumImage from '../album/AlbumImage';
 import Button from '../button/Button';
 import Modal, { ModalProps } from '../modal/Modal';
+import { AlbumSongsSearch } from '../../interfaces/itunes-album-songs-response';
+import LoadingIcon from '../loadingIcon/LoadingIcon';
+import { RiMusicFill } from 'react-icons/ri';
 
 import styles from './AlbumDetailsModal.module.scss';
+import { millisToMinutesAndSeconds } from '../../utils/time';
 
 interface AlbumDetailsModalProps extends Omit<ModalProps, 'children'> {
   album: Entry;
@@ -13,6 +18,26 @@ interface AlbumDetailsModalProps extends Omit<ModalProps, 'children'> {
 
 const AlbumDetailsModal = ({ album, show, onClose }: AlbumDetailsModalProps) => {
   const image = generateImageWithSizeFromUrl(album['im:image'][0].label, 600);
+  const [albumSongsData, setAlbumSongsData] = useState<AlbumSongsSearch | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchAlbumSongs = async () => {
+      try {
+        const res = await fetch(`https://itunes.apple.com/lookup?id=${album.id.attributes['im:id']}&entity=song`);
+        const data = (await res.json()) as AlbumSongsSearch;
+
+        setAlbumSongsData(data);
+      } catch (err: unknown) {
+        const error = err as Error;
+        console.error(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAlbumSongs();
+  }, [album.id.attributes]);
 
   return (
     <Modal show={show} onClose={onClose}>
@@ -40,6 +65,28 @@ const AlbumDetailsModal = ({ album, show, onClose }: AlbumDetailsModalProps) => 
           </div>
         </div>
       </div>
+
+      {isLoading ? (
+        <LoadingIcon />
+      ) : (
+        <div>
+          <div className={styles.songsContainer}>
+            <h2 className={styles.songsTitle}>Songs</h2>
+
+            {albumSongsData?.results
+              .filter(result => result.wrapperType === 'track')
+              .map(song => (
+                <div className={styles.song}>
+                  <RiMusicFill />
+                  {song.trackName}
+                  <span className={styles.songTime}>
+                    ({song.trackTimeMillis && millisToMinutesAndSeconds(song.trackTimeMillis)})
+                  </span>
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
     </Modal>
   );
 };

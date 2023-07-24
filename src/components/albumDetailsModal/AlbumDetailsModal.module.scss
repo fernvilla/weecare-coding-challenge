@@ -6,9 +6,8 @@
 }
 
 .imageContainer {
-  flex: 0 1 400px;
+  flex: 0 1 250px;
   position: relative;
-  margin-bottom: -4px;
 }
 
 .albumPrice {
@@ -65,4 +64,23 @@
 
 .albumLabel {
   font-size: 12px;
+}
+
+.songsContainer {
+  padding: 20px;
+}
+
+.songsTitle {
+  margin-bottom: 10px;
+}
+
+.song {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.songTime {
+  color: var(--color-red);
 }
