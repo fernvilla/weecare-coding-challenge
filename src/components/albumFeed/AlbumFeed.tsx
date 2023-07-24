@@ -12,10 +12,6 @@ interface AlbumFeedProps {
   onAlbumSelect: (album: AlbumEntry) => void;
 }
 
-export interface FilterOptions {
-  genres: CategoryAttributes['label'][];
-}
-
 const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
   const { albums } = useAlbums();
   const scrollToRef = useRef<HTMLDivElement>(null);
@@ -81,19 +77,8 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
     }
   }, [albums, selectedAlphabet, selectedGenres]);
 
-  // TODO: improve this or add other data generated filters
-  const filterOptions = albums.reduce<FilterOptions>(
-    (acc, album) => {
-      const genre = album.category.attributes.label;
-
-      if (!acc.genres.includes(genre)) {
-        acc.genres.push(genre);
-      }
-
-      return acc;
-    },
-    { genres: [] }
-  );
+  // use Set to get unique values
+  const genreOptions = [...new Set(albums.map(album => album.category.attributes.label))];
 
   const onGenreSelect = (genre: CategoryAttributes['label']) => {
     if (selectedGenres.includes(genre)) {
@@ -129,7 +114,7 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
       {showFilters && (
         <div ref={scrollToRef}>
           <AlbumFeedFilters
-            filterOptions={filterOptions}
+            genreOptions={genreOptions}
             onGenreSelect={onGenreSelect}
             selectedGenres={selectedGenres}
             onAlphabetSelect={onAlphabetSelect}

@@ -1,14 +1,12 @@
 import clsx from 'clsx';
 import { CategoryAttributes } from '../../interfaces/itunes-response';
-import { FilterOptions } from './AlbumFeed';
-
+import { Fragment } from 'react';
 import { generateAlphabet } from '../../utils/strings';
 
 import styles from './AlbumFeedFilters.module.scss';
-import { Fragment } from 'react';
 
 interface AlbumFeedFiltersProps {
-  filterOptions: FilterOptions;
+  genreOptions: CategoryAttributes['label'][];
   onGenreSelect: (genre: CategoryAttributes['label']) => void;
   selectedGenres: CategoryAttributes['label'][];
   onAlphabetSelect: (letter: string) => void;
@@ -16,7 +14,7 @@ interface AlbumFeedFiltersProps {
 }
 
 const AlbumFeedFilters = ({
-  filterOptions,
+  genreOptions,
   onGenreSelect,
   selectedGenres,
   selectedAlphabet,
@@ -28,7 +26,7 @@ const AlbumFeedFilters = ({
       <div className={styles.feedFilterHeader}>By Genre</div>
 
       <div className={styles.feedGenreFilters}>
-        {filterOptions.genres.map(genre => (
+        {genreOptions.map(genre => (
           <div
             key={genre}
             className={clsx(styles.feedGenreOption, {
