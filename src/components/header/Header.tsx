@@ -11,7 +11,7 @@ const Header = () => {
     <nav className={styles.header}>
       <div className={styles.headerLogo}>
         <RiAlbumFill size={30} color="#df3940" />
-        <span>WeeCare Music</span>
+        <span>Top Music</span>
       </div>
 
       <Button isLink onClick={toggleFavoritesDrawer}>

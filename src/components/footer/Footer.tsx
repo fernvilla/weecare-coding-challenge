@@ -3,10 +3,10 @@ import styles from './Footer.module.scss';
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <a>About</a>
-      <a>Contact</a>
-      <a>Sign Up</a>
-      <a>Log In</a>
+      <a href="/">About</a>
+      <a href="/">Contact</a>
+      <a href="/">Sign Up</a>
+      <a href="/">Log In</a>
     </footer>
   );
 };
