@@ -1,0 +1,11 @@
+.favoriteIcon {
+  position: relative;
+  bottom: -2px;
+  cursor: pointer;
+  margin-left: 3px;
+
+  &.favoriteIconActive,
+  &:hover {
+    color: var(--color-red);
+  }
+}

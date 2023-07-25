@@ -9,6 +9,8 @@ import { AlbumSongsSearch, Result } from '../../interfaces/itunes-album-songs-re
 import LoadingIcon from '../loadingIcon/LoadingIcon';
 import { RiMusicFill } from 'react-icons/ri';
 import { millisToMinutesAndSeconds } from '../../utils/time';
+import { useFavorites } from '../../hooks/useFavorites';
+import FavoriteIcon from '../favoriteIcon/FavoriteIcon';
 
 import styles from './AlbumDetailsModal.module.scss';
 
@@ -20,6 +22,8 @@ const AlbumDetailsModal = ({ album, show, onClose }: AlbumDetailsModalProps) => 
   const image = generateImageWithSizeFromUrl(album['im:image'][0].label, 600);
   const [albumSongsData, setAlbumSongsData] = useState<Result[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { checkIfFavorite, onFavoriteClick } = useFavorites();
+  const isFavorite = checkIfFavorite(album);
 
   useEffect(() => {
     const fetchAlbumSongs = async () => {
@@ -50,7 +54,10 @@ const AlbumDetailsModal = ({ album, show, onClose }: AlbumDetailsModalProps) => 
 
         <div className={styles.detailsContainer}>
           <div>
-            <h2 className={styles.albumName}>{album['im:name'].label}</h2>
+            <h2 className={styles.albumName}>
+              {album['im:name'].label}
+              <FavoriteIcon isFavorite={isFavorite} onFavoriteClick={() => onFavoriteClick(album)} size={18} />
+            </h2>
             <h2 className={styles.albumArtistName}>{album['im:artist'].label}</h2>
             <h3 className={styles.albumReleaseDate}>Released: {formatDate(album['im:releaseDate'].label)}</h3>
             <h3 className={styles.albumCategory}>{album.category.attributes.label}</h3>

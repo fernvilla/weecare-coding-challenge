@@ -1,9 +1,8 @@
-import { RiHeartFill, RiHeartLine } from 'react-icons/ri';
 import { AlbumEntry } from '../../interfaces/itunes-response';
 import { generateImageWithSizeFromUrl } from '../../utils/images';
 import AlbumImage from './AlbumImage';
 import { useFavorites } from '../../hooks/useFavorites';
-import clsx from 'clsx';
+import FavoriteIcon from '../favoriteIcon/FavoriteIcon';
 
 import styles from './Album.module.scss';
 
@@ -37,15 +36,7 @@ const Album = ({ album, onAlbumSelect, albumIndex }: AlbumProps) => {
         <div className={styles.albumTitle}>
           <span>{album['im:name'].label} </span>
 
-          <span
-            className={clsx(styles.favoriteIcon, {
-              [styles.favoriteIconActive]: isFavorite
-            })}
-            onClick={e => handleOnFavoriteClick(e, album)}
-            title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-          >
-            {isFavorite ? <RiHeartFill color="#df3940" /> : <RiHeartLine />}
-          </span>
+          <FavoriteIcon isFavorite={isFavorite} onFavoriteClick={e => handleOnFavoriteClick(e, album)} />
         </div>
 
         <div className={styles.artistName}>{album['im:artist'].label}</div>
