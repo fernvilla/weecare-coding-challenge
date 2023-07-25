@@ -1,0 +1,54 @@
+.albumSort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.albumSortDropdown {
+  position: relative;
+  display: flex;
+  margin-left: -10px;
+}
+
+.albumSortDropdownSelect {
+  cursor: pointer;
+  padding: 12px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  &:hover ~ .albumSortDropdownOptions {
+    display: block;
+  }
+}
+
+.albumSortDropdownOptions {
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  top: 35px;
+  left: 0;
+  background-color: #ffffff;
+  z-index: 10;
+  width: 100%;
+  min-width: 200px;
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+  &:hover {
+    display: block;
+  }
+}
+
+.albumSortDropdownOption {
+  padding: 12px 10px;
+
+  &:hover {
+    background-color: #000000;
+    color: #ffffff;
+  }
+}

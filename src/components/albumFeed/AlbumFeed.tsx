@@ -6,6 +6,8 @@ import AlbumFeedFilters from './AlbumFeedFilters';
 import AlbumFeedSearch from './AlbumFeedSearch';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useAlbums } from '../../hooks/useAlbums';
+import AlbumSort, { AlbumSortOption } from './AlbumSort';
+
 import styles from './AlbumFeed.module.scss';
 
 interface AlbumFeedProps {
@@ -21,6 +23,7 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
   const [selectedAlphanumeric, setSelectedAlphanumeric] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const debouncedSearchTerm = useDebounce<string>(searchTerm, 500);
+  const [selectedSort, setSelectedSort] = useState<AlbumSortOption | null>(null);
 
   useEffect(() => {
     if (showFilters && scrollToRef.current) {
@@ -122,6 +125,61 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
     }
   };
 
+  const sortItems = (sort: AlbumSortOption) => {
+    const newAlbums = filteredAlbums.sort((a, b) => {
+      if (sort.type === 'artistName') {
+        const artistALabel = a['im:artist'].label;
+        const artistBLabel = b['im:artist'].label;
+
+        switch (sort.order) {
+          case 'asc':
+            return artistALabel.localeCompare(artistBLabel);
+          case 'desc':
+            return artistBLabel.localeCompare(artistALabel);
+          default:
+            return artistALabel.localeCompare(artistBLabel); // Default a-z
+        }
+      }
+
+      if (sort.type === 'albumName') {
+        const albumALabel = a['im:name'].label;
+        const albumBLabel = b['im:name'].label;
+
+        switch (sort.order) {
+          case 'asc':
+            return albumALabel.localeCompare(albumBLabel);
+          case 'desc':
+            return albumBLabel.localeCompare(albumALabel);
+          default:
+            return albumALabel.localeCompare(albumBLabel); // Default a-z
+        }
+      }
+
+      if (sort.type === 'releaseDate') {
+        const releaseDateA = new Date(a['im:releaseDate'].label);
+        const releaseDateB = new Date(b['im:releaseDate'].label);
+
+        switch (sort.order) {
+          case 'asc':
+            return releaseDateA.getTime() - releaseDateB.getTime();
+          case 'desc':
+            return releaseDateB.getTime() - releaseDateA.getTime();
+          default:
+            return releaseDateB.getTime() - releaseDateA.getTime(); // Default newest
+        }
+      }
+
+      return 0;
+    });
+
+    setFilteredAlbums(newAlbums);
+  };
+
+  const onSortChange = (sort: AlbumSortOption) => {
+    setSelectedSort(sort);
+    sortItems(sort);
+  };
+
   return (
     <div className={styles.feedContainer}>
       {/* Header section w/filter toggle and search */}
@@ -152,6 +210,9 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
           />
         </div>
       )}
+
+      {/* Album Sort */}
+      <AlbumSort onSortChange={onSortChange} selectedSort={selectedSort} />
 
       {/* Feed */}
       <div className={styles.feed}>
