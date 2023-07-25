@@ -104,7 +104,7 @@ export interface IMPriceAttributes {
 export type Currency = 'USD';
 
 export interface IMReleaseDate {
-  label: Date;
+  label: string;
   attributes: Icon;
 }
 

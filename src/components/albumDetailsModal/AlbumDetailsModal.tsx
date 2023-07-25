@@ -66,7 +66,7 @@ const AlbumDetailsModal = ({ album, show, onClose }: AlbumDetailsModalProps) => 
             </h2>
             <h2 className={styles.albumArtistName}>{album['im:artist'].label}</h2>
             <h3 className={styles.albumReleaseDate}>
-              Released: {formatDate(album['im:releaseDate'].label)}
+              Released: {formatDate(new Date(album['im:releaseDate'].label))}
             </h3>
             <h3 className={styles.albumCategory}>{album.category.attributes.label}</h3>
           </div>

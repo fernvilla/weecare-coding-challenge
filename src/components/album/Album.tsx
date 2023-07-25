@@ -43,7 +43,7 @@ const Album = ({ album, onAlbumSelect, albumIndex }: AlbumProps) => {
 
       <div className={styles.albumTextContainer}>
         <div className={styles.albumTitle}>
-          <span>{album['im:name'].label} </span>
+          <span role="heading">{album['im:name'].label} </span>
 
           <FavoriteIcon
             isFavorite={isFavorite}
