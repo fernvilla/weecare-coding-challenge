@@ -15,4 +15,7 @@ export default defineConfig({
       reporter: ['text'],
     },
   },
+  server: {
+    cors: false,
+  },
 });
