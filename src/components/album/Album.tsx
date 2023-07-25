@@ -33,7 +33,11 @@ const Album = ({ album, onAlbumSelect, albumIndex }: AlbumProps) => {
       // Add a delay to the animation based on the album index (only for the first n albums)
       style={{ animationDuration: `${albumIndex <= 6 ? albumIndex * 0.5 : 3.5}s` }}
     >
-      <AlbumImage image={image} label={album.title.label} />
+      <AlbumImage
+        image={image}
+        label={album.title.label}
+        loading={albumIndex > 6 ? 'lazy' : 'eager'}
+      />
 
       <div className={styles.albumTextContainer}>
         <div className={styles.albumTitle}>
