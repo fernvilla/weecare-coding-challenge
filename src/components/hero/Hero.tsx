@@ -50,7 +50,7 @@ const Hero = () => {
           </p>
 
           <p className={styles.heroTagline}>
-            Listen to the Top 100 Albums on the go <span className="text-red text-bold">Now!</span>
+            Listen to the Top Albums on the go <span className="text-red text-bold">Now!</span>
           </p>
         </div>
       </div>
