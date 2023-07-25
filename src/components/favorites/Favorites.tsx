@@ -8,11 +8,14 @@ import FavoritesAutoComplete from '../favoritesAutocomplete/FavoritesAutoComplet
 import styles from './Favorites.module.scss';
 
 const Favorites = () => {
-  const { showFavoritesDrawer, toggleFavoritesDrawer, favorites, removeFavorite } = useFavorites();
+  const { showFavoritesDrawer, toggleFavoritesDrawer, favorites, removeFavorite, favoritesCount } =
+    useFavorites();
 
   return (
     <Drawer open={showFavoritesDrawer} onClose={() => toggleFavoritesDrawer()}>
-      <h2 className="text-bold">Favorites</h2>
+      <h2 className="text-bold">
+        Favorites {favoritesCount > 0 && <span className="text-normal">({favoritesCount})</span>}
+      </h2>
 
       <FavoritesAutoComplete />
 
