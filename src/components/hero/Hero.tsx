@@ -12,7 +12,7 @@ const Hero = () => {
   // Prevent re-rendering of the random albums by using useMemo
   const randomAlbums = useMemo(() => generateRandomArrayItems(albums, 3), [albums]);
   const randomAlbumsImages = randomAlbums.map((album) =>
-    generateImageWithSizeFromUrl(album['im:image'][0].label, 600),
+    generateImageWithSizeFromUrl(album['im:image'][0].label, 300),
   );
 
   return (

@@ -15,7 +15,7 @@ interface AlbumProps {
 const Album = ({ album, onAlbumSelect, albumIndex }: AlbumProps) => {
   const { onFavoriteClick, checkIfFavorite } = useFavorites();
   // Increase the size of the image by replacing api width with '500x500' (double the element size)
-  const image = generateImageWithSizeFromUrl(album['im:image'][0].label, 500);
+  const image = generateImageWithSizeFromUrl(album['im:image'][0].label, 250);
   const isFavorite = checkIfFavorite(album);
 
   const handleOnFavoriteClick = (
