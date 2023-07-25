@@ -3,7 +3,7 @@ import { ReactElement } from 'react';
 import AlbumsProvider from '../context/albumsContext';
 import FavoritesProvider from '../context/favoritesContext';
 
-export function renderWithClient(ui: ReactElement) {
+export function renderWithProviders(ui: ReactElement) {
   return render(
     <AlbumsProvider>
       <FavoritesProvider>{ui}</FavoritesProvider>

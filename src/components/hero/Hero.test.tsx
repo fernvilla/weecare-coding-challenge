@@ -1,11 +1,11 @@
 import { describe, test, expect } from 'vitest';
 import { screen } from '@testing-library/react';
 import Hero from './Hero';
-import { renderWithClient } from '../../test/utils';
+import { renderWithProviders } from '../../test/utils';
 
 describe('Hero test', () => {
   test('Should show headline text', () => {
-    renderWithClient(<Hero />);
+    renderWithProviders(<Hero />);
 
     const heading = screen.getByRole('heading', {
       name: /harmonize your world/i,
