@@ -35,6 +35,7 @@ const FavoritesAutoComplete = () => {
     };
   }, []);
 
+  // Filter albums by search term
   useEffect(() => {
     if (!debouncedSearchTerm) {
       setFilteredAlbums([]);
@@ -54,6 +55,7 @@ const FavoritesAutoComplete = () => {
   }, [albums, debouncedSearchTerm]);
 
   const handleOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Allow use to cycle through the suggestions with the arrow keys and select with enter
     if (e.key === 'ArrowDown') {
       setSelectedIndex((selectedIndex) =>
         selectedIndex < suggestions.length - 1 ? selectedIndex + 1 : 0,

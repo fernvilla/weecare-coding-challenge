@@ -29,12 +29,14 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
     }
   }, [showFilters]);
 
+  // Filter albums by search term
   useEffect(() => {
     if (!debouncedSearchTerm) {
       setFilteredAlbums(albums);
     } else {
       setFilteredAlbums(
         albums.filter((album) => {
+          // Check if the artist or album name includes the search term
           const artist = album['im:artist'].label;
           const albumName = album['im:name'].label;
 
@@ -47,29 +49,35 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
     }
   }, [albums, debouncedSearchTerm]);
 
+  // Filter albums by genre and/or alphanumeric
   useEffect(() => {
     if (!selectedGenres.length && !selectedAlphanumeric.length) {
       setFilteredAlbums(albums);
     } else {
       setFilteredAlbums(
         albums.filter((album) => {
+          // Check if the album matches the selected genre and/or alphanumeric
           const genre = album.category.attributes.label;
           const artist = album['im:artist'].label;
           const albumName = album['im:name'].label;
+          // Check if the first character of the artist or album name is a number for the '1-9' filter
           const firstCharArtist = artist.charAt(0).toUpperCase();
           const firstCharArtistIsNumber = !isNaN(parseInt(firstCharArtist));
           const firstCharAlbumName = albumName.charAt(0).toUpperCase();
           const firstCharAlbumNameIsNumber = !isNaN(parseInt(firstCharAlbumName));
 
+          // If both filters are selected, check if the album matches both filters
           if (selectedGenres.length && selectedAlphanumeric.length) {
             if (selectedAlphanumeric.includes('1-9')) {
               return (
+                // 'AND' filter
                 selectedGenres.includes(genre) &&
                 (firstCharArtistIsNumber || firstCharAlbumNameIsNumber)
               );
             }
 
             return (
+              // 'AND' filter
               selectedGenres.includes(genre) &&
               (selectedAlphanumeric.includes(artist.charAt(0).toUpperCase()) ||
                 selectedAlphanumeric.includes(albumName.charAt(0).toUpperCase()))
@@ -78,12 +86,14 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
 
           if (selectedAlphanumeric.includes('1-9')) {
             return (
+              // 'OR' filter
               selectedGenres.includes(genre) ||
               firstCharArtistIsNumber ||
               firstCharAlbumNameIsNumber
             );
           }
 
+          // Default 'OR' filter when only one filter is selected
           return (
             selectedGenres.includes(genre) ||
             selectedAlphanumeric.includes(artist.charAt(0).toUpperCase()) ||
@@ -114,6 +124,7 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
 
   return (
     <div className={styles.feedContainer}>
+      {/* Header section w/filter toggle and search */}
       <div className={styles.feedTitleContainer}>
         <h2>Top Albums</h2>
 
@@ -130,6 +141,7 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
         </div>
       </div>
 
+      {/* Feed Filter Section */}
       {showFilters && (
         <div ref={scrollToRef}>
           <AlbumFeedFilters
@@ -141,6 +153,7 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
         </div>
       )}
 
+      {/* Feed */}
       <div className={styles.feed}>
         {filteredAlbums.map((album, i) => (
           <Album

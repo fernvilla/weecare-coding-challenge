@@ -28,7 +28,7 @@ const Drawer = ({ open, onClose, children }: DrawerProps) => {
     return () => {
       document.removeEventListener('click', handleClickOutside, true);
     };
-  }, []);
+  }, [onClose]);
 
   useEffect(() => {
     setIsOpen(open);

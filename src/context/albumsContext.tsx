@@ -30,6 +30,10 @@ const AlbumsProvider = ({ children }: { children: React.ReactNode }) => {
     fetchSongData();
   }, []);
 
+  /* Map the album data to get the filter options
+   * This is done here so that the filter options are only calculated once
+   * more data-generated filter types can be added here in the future
+   */
   const mapAlbumData = (albums: AlbumEntry[]) => {
     const filterOptions = { genres: [] } as FilterOptions;
 

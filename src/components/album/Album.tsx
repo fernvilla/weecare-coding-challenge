@@ -22,6 +22,7 @@ const Album = ({ album, onAlbumSelect, albumIndex }: AlbumProps) => {
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
     album: AlbumEntry,
   ) => {
+    // Prevent the album from being selected when clicking on the favorite icon
     e.stopPropagation();
     onFavoriteClick(album);
   };
@@ -36,6 +37,7 @@ const Album = ({ album, onAlbumSelect, albumIndex }: AlbumProps) => {
       <AlbumImage
         image={image}
         label={album.title.label}
+        // Eager load the first 6 albums and lazy load the rest
         loading={albumIndex > 6 ? 'lazy' : 'eager'}
       />
 
