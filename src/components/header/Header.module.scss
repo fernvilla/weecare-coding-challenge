@@ -1,3 +1,5 @@
+@import './../../styles/mixins/breakpoints.scss';
+
 .header {
   background-color: #ffffff;
   display: flex;
@@ -11,6 +13,10 @@
   display: flex;
   align-items: center;
   gap: 3px;
+}
+
+.headerButton {
+  padding-right: 0;
 }
 
 .favoritesLinkContainer {
@@ -28,4 +34,27 @@
   justify-content: center;
   align-items: center;
   font-size: 12px;
+  position: relative;
+  top: -1px;
+  display: none;
+
+  @include sm-breakpoint {
+    display: inline-flex;
+  }
+}
+
+.viewText {
+  display: none;
+
+  @include sm-breakpoint {
+    display: inline-block;
+  }
+}
+
+.favoriteIcon {
+  display: inline-block;
+
+  @include sm-breakpoint {
+    display: none;
+  }
 }

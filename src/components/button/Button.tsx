@@ -9,6 +9,7 @@ interface ButtonProps {
   children: React.ReactNode;
   fullWidth?: boolean;
   isLink?: boolean;
+  className?: string;
 }
 
 const Button = ({
@@ -18,16 +19,21 @@ const Button = ({
   disabled = false,
   fullWidth = false,
   isLink = false,
+  className,
 }: ButtonProps) => {
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={clsx(styles.button, {
-        [styles.fullWidth]: fullWidth,
-        [styles.isLink]: isLink,
-      })}
+      className={clsx(
+        styles.button,
+        {
+          [styles.fullWidth]: fullWidth,
+          [styles.isLink]: isLink,
+        },
+        className,
+      )}
     >
       {children}
     </button>

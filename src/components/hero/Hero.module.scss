@@ -19,9 +19,14 @@
 }
 
 .heroLeftColumn {
-  flex: 1 0 45%;
+  flex: 1 0 25%;
   // Offset hero image right offset
-  padding-right: 60px;
+  padding-right: 30px;
+
+  @include sm-breakpoint {
+    flex: 1 0 45%;
+    padding-right: 60px;
+  }
 }
 
 .imagesContainer {
@@ -40,7 +45,7 @@
 }
 
 .heroTitle {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   margin-bottom: 20px;
 
@@ -50,7 +55,7 @@
 }
 
 .heroTagline {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   margin-bottom: 20px;
 

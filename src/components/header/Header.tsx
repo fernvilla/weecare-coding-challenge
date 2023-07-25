@@ -1,4 +1,4 @@
-import { RiAlbumFill } from 'react-icons/ri';
+import { RiAlbumFill, RiHeartFill } from 'react-icons/ri';
 import Button from '../button/Button';
 import { useFavorites } from '../../hooks/useFavorites';
 
@@ -14,11 +14,15 @@ const Header = () => {
         <span>Top Music</span>
       </div>
 
-      <Button isLink onClick={toggleFavoritesDrawer}>
+      <Button isLink onClick={toggleFavoritesDrawer} className={styles.headerButton}>
         <div className={styles.favoritesLinkContainer}>
           {favoritesCount > 0 ? (
             <span>
-              View your Favorites <span className={styles.favoritesCount}>{favoritesCount}</span>
+              <span className={styles.viewText}>View your Favorites</span>{' '}
+              <span className={styles.favoriteIcon}>
+                <RiHeartFill />
+              </span>
+              <span className={styles.favoritesCount}>{favoritesCount}</span>
             </span>
           ) : (
             <span>Add Favorites</span>
