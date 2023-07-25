@@ -53,6 +53,6 @@ const album: AlbumEntry = {
   'im:releaseDate': { label: '2023-07-21T00:00:00-07:00', attributes: { label: 'July 21, 2023' } },
 };
 
-export const image = generateImageWithSizeFromUrl(album['im:image'][0].label, 500);
+export const image = generateImageWithSizeFromUrl(album['im:image'][0].label, 250);
 
 export default album;
