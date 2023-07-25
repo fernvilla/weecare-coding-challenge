@@ -34,6 +34,7 @@ const Hero = () => {
                 label="Album image"
                 key={image}
                 removeHover
+                loading="eager"
               />
             ))}
           </div>

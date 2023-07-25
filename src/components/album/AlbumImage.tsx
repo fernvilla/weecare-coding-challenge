@@ -7,9 +7,10 @@ interface AlbumImageProps {
   label: string;
   removeHover?: boolean;
   style?: React.CSSProperties;
+  loading?: 'lazy' | 'eager';
 }
 
-const AlbumImage = ({ image, label, removeHover, style }: AlbumImageProps) => {
+const AlbumImage = ({ image, label, removeHover, style, loading = 'lazy' }: AlbumImageProps) => {
   return (
     <img
       src={image}
@@ -18,7 +19,7 @@ const AlbumImage = ({ image, label, removeHover, style }: AlbumImageProps) => {
         [styles.hoverable]: !removeHover,
       })}
       style={style}
-      loading="lazy"
+      loading={loading}
     />
   );
 };
