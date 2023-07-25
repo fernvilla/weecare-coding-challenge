@@ -19,9 +19,21 @@
   display: grid;
   row-gap: 20px;
   column-gap: 30px;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
 
   @include sm-breakpoint {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  @include md-breakpoint {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  @include lg-breakpoint {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+
+  @include xl-breakpoint {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }
