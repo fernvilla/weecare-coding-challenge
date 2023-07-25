@@ -10,7 +10,7 @@ interface AlbumFeedSearchProps {
 const AlbumFeedSearch = ({ onSearch }: AlbumFeedSearchProps) => {
   return (
     <div className={styles.albumSearchContainer}>
-      <Input placeholder="Search Albums" onChange={e => onSearch(e.target.value)} />
+      <Input placeholder="Search Albums" onChange={(e) => onSearch(e.target.value)} />
 
       <div className={styles.albumSearchToggle}>
         <RiSearchLine />

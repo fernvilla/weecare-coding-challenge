@@ -18,7 +18,10 @@ const Album = ({ album, onAlbumSelect, albumIndex }: AlbumProps) => {
   const image = generateImageWithSizeFromUrl(album['im:image'][0].label, 500);
   const isFavorite = checkIfFavorite(album);
 
-  const handleOnFavoriteClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, album: AlbumEntry) => {
+  const handleOnFavoriteClick = (
+    e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
+    album: AlbumEntry,
+  ) => {
     e.stopPropagation();
     onFavoriteClick(album);
   };
@@ -36,7 +39,10 @@ const Album = ({ album, onAlbumSelect, albumIndex }: AlbumProps) => {
         <div className={styles.albumTitle}>
           <span>{album['im:name'].label} </span>
 
-          <FavoriteIcon isFavorite={isFavorite} onFavoriteClick={e => handleOnFavoriteClick(e, album)} />
+          <FavoriteIcon
+            isFavorite={isFavorite}
+            onFavoriteClick={(e) => handleOnFavoriteClick(e, album)}
+          />
         </div>
 
         <div className={styles.artistName}>{album['im:artist'].label}</div>

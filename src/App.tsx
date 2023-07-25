@@ -44,7 +44,11 @@ function App() {
             <AlbumFeed onAlbumSelect={handleAlbumSelect} />
 
             {selectedAlbum && (
-              <AlbumDetailsModal album={selectedAlbum} onClose={() => setSelectedAlbum(null)} show={!!selectedAlbum} />
+              <AlbumDetailsModal
+                album={selectedAlbum}
+                onClose={() => setSelectedAlbum(null)}
+                show={!!selectedAlbum}
+              />
             )}
           </Layout>
         </>

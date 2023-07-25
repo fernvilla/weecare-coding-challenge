@@ -17,7 +17,7 @@ const Button = ({
   children,
   disabled = false,
   fullWidth = false,
-  isLink = false
+  isLink = false,
 }: ButtonProps) => {
   return (
     <button
@@ -26,7 +26,7 @@ const Button = ({
       disabled={disabled}
       className={clsx(styles.button, {
         [styles.fullWidth]: fullWidth,
-        [styles.isLink]: isLink
+        [styles.isLink]: isLink,
       })}
     >
       {children}

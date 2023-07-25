@@ -15,7 +15,7 @@ const AlbumImage = ({ image, label, removeHover, style }: AlbumImageProps) => {
       src={image}
       alt={label}
       className={clsx(styles.albumImage, {
-        [styles.hoverable]: !removeHover
+        [styles.hoverable]: !removeHover,
       })}
       style={style}
       loading="lazy"

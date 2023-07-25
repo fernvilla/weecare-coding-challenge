@@ -8,7 +8,7 @@ describe('Hero test', () => {
     renderWithClient(<Hero />);
 
     const heading = screen.getByRole('heading', {
-      name: /harmonize your world/i
+      name: /harmonize your world/i,
     });
 
     expect(heading).toBeDefined();

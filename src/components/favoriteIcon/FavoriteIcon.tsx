@@ -14,7 +14,7 @@ const FavoriteIcon = ({ isFavorite, onFavoriteClick, size }: FavoriteIconProps) 
   return (
     <span
       className={clsx(styles.favoriteIcon, {
-        [styles.favoriteIconActive]: isFavorite
+        [styles.favoriteIconActive]: isFavorite,
       })}
       onClick={onFavoriteClick}
       title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}

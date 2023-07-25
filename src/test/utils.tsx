@@ -7,6 +7,6 @@ export function renderWithClient(ui: ReactElement) {
   return render(
     <AlbumsProvider>
       <FavoritesProvider>{ui}</FavoritesProvider>
-    </AlbumsProvider>
+    </AlbumsProvider>,
   );
 }

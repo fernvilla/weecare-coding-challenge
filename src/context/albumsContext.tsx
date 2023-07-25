@@ -33,7 +33,7 @@ const AlbumsProvider = ({ children }: { children: React.ReactNode }) => {
   const mapAlbumData = (albums: AlbumEntry[]) => {
     const filterOptions = { genres: [] } as FilterOptions;
 
-    albums.forEach(album => {
+    albums.forEach((album) => {
       const genre = album.category.attributes.label;
 
       if (!filterOptions.genres.includes(genre)) {
@@ -45,7 +45,9 @@ const AlbumsProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AlbumsContext.Provider value={{ isLoading, albums, error, filterOptions }}>{children}</AlbumsContext.Provider>
+    <AlbumsContext.Provider value={{ isLoading, albums, error, filterOptions }}>
+      {children}
+    </AlbumsContext.Provider>
   );
 };
 

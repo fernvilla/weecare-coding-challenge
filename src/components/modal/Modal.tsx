@@ -42,7 +42,7 @@ const Modal = ({ show, onClose, children }: ModalProps) => {
       <div
         className={clsx(styles.modalContent, {
           [styles.modalShow]: show,
-          [styles.modalHide]: !show
+          [styles.modalHide]: !show,
         })}
         ref={ref}
       >

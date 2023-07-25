@@ -39,7 +39,7 @@ const Drawer = ({ open, onClose, children }: DrawerProps) => {
   return (
     <div
       className={clsx(styles.drawer, {
-        [styles.drawerOpen]: isOpen
+        [styles.drawerOpen]: isOpen,
       })}
       ref={ref}
     >

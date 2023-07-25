@@ -6,7 +6,9 @@ export const FavoritesContext = createContext<FavoritesContextInterface | null>(
 const LOCAL_STORAGE_KEY = 'favorites';
 
 const FavoritesProvider = ({ children }: { children: React.ReactNode }) => {
-  const storedFavorites = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]') as FavoriteSong[];
+  const storedFavorites = JSON.parse(
+    localStorage.getItem(LOCAL_STORAGE_KEY) || '[]',
+  ) as FavoriteSong[];
   const [favorites, setFavorites] = useState<FavoriteSong[]>(storedFavorites || []);
   const [showFavoritesDrawer, setShowFavoritesDrawer] = useState(false);
 
@@ -22,18 +24,20 @@ const FavoritesProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const removeFavorite = (song: FavoriteSong) => {
-    const updatedFavorites = favorites.filter(favorite => favorite.id !== song.id);
+    const updatedFavorites = favorites.filter((favorite) => favorite.id !== song.id);
 
     setFavorites(updatedFavorites);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedFavorites));
   };
 
   const checkIfFavorite = (song: FavoriteSong) => {
-    return favorites.some(favorite => favorite.id.attributes['im:id'] === song.id.attributes['im:id']);
+    return favorites.some(
+      (favorite) => favorite.id.attributes['im:id'] === song.id.attributes['im:id'],
+    );
   };
 
   const toggleFavoritesDrawer = () => {
-    setShowFavoritesDrawer(showFavoritesDrawer => !showFavoritesDrawer);
+    setShowFavoritesDrawer((showFavoritesDrawer) => !showFavoritesDrawer);
   };
 
   return (
@@ -46,7 +50,7 @@ const FavoritesProvider = ({ children }: { children: React.ReactNode }) => {
         onFavoriteClick,
         favoritesCount: favorites.length || 0,
         showFavoritesDrawer,
-        toggleFavoritesDrawer
+        toggleFavoritesDrawer,
       }}
     >
       {children}

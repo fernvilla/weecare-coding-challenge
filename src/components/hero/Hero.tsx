@@ -11,7 +11,9 @@ const Hero = () => {
   // Grab 3 random albums from the list to display on the hero
   // Prevent re-rendering of the random albums by using useMemo
   const randomAlbums = useMemo(() => generateRandomArrayItems(albums, 3), [albums]);
-  const randomAlbumsImages = randomAlbums.map(album => generateImageWithSizeFromUrl(album['im:image'][0].label, 600));
+  const randomAlbumsImages = randomAlbums.map((album) =>
+    generateImageWithSizeFromUrl(album['im:image'][0].label, 600),
+  );
 
   return (
     <div className={styles.hero}>
@@ -27,7 +29,7 @@ const Hero = () => {
                   width: 250 + albumIndex * 25,
                   position: 'absolute',
                   right: albumIndex * 40,
-                  zIndex: albumIndex
+                  zIndex: albumIndex,
                 }}
                 label="Album image"
                 key={image}
@@ -42,7 +44,8 @@ const Hero = () => {
           <h1 className={styles.heroTitle}>Harmonize Your World</h1>
 
           <p className={styles.heroTagline}>
-            Discover, Stream, and Experience Music Like Never Before with our Cutting-Edge Music App!
+            Discover, Stream, and Experience Music Like Never Before with our Cutting-Edge Music
+            App!
           </p>
 
           <p className={styles.heroTagline}>

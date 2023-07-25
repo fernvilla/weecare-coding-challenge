@@ -34,7 +34,7 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
       setFilteredAlbums(albums);
     } else {
       setFilteredAlbums(
-        albums.filter(album => {
+        albums.filter((album) => {
           const artist = album['im:artist'].label;
           const albumName = album['im:name'].label;
 
@@ -42,7 +42,7 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
             artist.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
             albumName.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
           );
-        })
+        }),
       );
     }
   }, [albums, debouncedSearchTerm]);
@@ -52,7 +52,7 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
       setFilteredAlbums(albums);
     } else {
       setFilteredAlbums(
-        albums.filter(album => {
+        albums.filter((album) => {
           const genre = album.category.attributes.label;
           const artist = album['im:artist'].label;
           const albumName = album['im:name'].label;
@@ -63,7 +63,10 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
 
           if (selectedGenres.length && selectedAlphanumeric.length) {
             if (selectedAlphanumeric.includes('1-9')) {
-              return selectedGenres.includes(genre) && (firstCharArtistIsNumber || firstCharAlbumNameIsNumber);
+              return (
+                selectedGenres.includes(genre) &&
+                (firstCharArtistIsNumber || firstCharAlbumNameIsNumber)
+              );
             }
 
             return (
@@ -74,7 +77,11 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
           }
 
           if (selectedAlphanumeric.includes('1-9')) {
-            return selectedGenres.includes(genre) || firstCharArtistIsNumber || firstCharAlbumNameIsNumber;
+            return (
+              selectedGenres.includes(genre) ||
+              firstCharArtistIsNumber ||
+              firstCharAlbumNameIsNumber
+            );
           }
 
           return (
@@ -82,14 +89,14 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
             selectedAlphanumeric.includes(artist.charAt(0).toUpperCase()) ||
             selectedAlphanumeric.includes(albumName.charAt(0).toUpperCase())
           );
-        })
+        }),
       );
     }
   }, [albums, selectedAlphanumeric, selectedGenres]);
 
   const onGenreSelect = (genre: CategoryAttributes['label']) => {
     if (selectedGenres.includes(genre)) {
-      setSelectedGenres(selectedGenres.filter(selectedGenre => selectedGenre !== genre));
+      setSelectedGenres(selectedGenres.filter((selectedGenre) => selectedGenre !== genre));
     } else {
       setSelectedGenres([...selectedGenres, genre]);
     }
@@ -97,7 +104,9 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
 
   const onAlphanumericSelect = (alphabet: string) => {
     if (selectedAlphanumeric.includes(alphabet)) {
-      setSelectedAlphanumeric(selectedAlphanumeric.filter(selectedAlphanumeric => selectedAlphanumeric !== alphabet));
+      setSelectedAlphanumeric(
+        selectedAlphanumeric.filter((selectedAlphanumeric) => selectedAlphanumeric !== alphabet),
+      );
     } else {
       setSelectedAlphanumeric([...selectedAlphanumeric, alphabet]);
     }
@@ -111,7 +120,10 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
         <div className={styles.feedActionsContainer}>
           <AlbumFeedSearch onSearch={setSearchTerm} />
 
-          <div className={styles.feedActionsToggle} onClick={() => setShowFilters(showFilters => !showFilters)}>
+          <div
+            className={styles.feedActionsToggle}
+            onClick={() => setShowFilters((showFilters) => !showFilters)}
+          >
             <RiEqualizerFill color="#df3940" />
             <span>Filters</span>
           </div>
@@ -131,7 +143,12 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
 
       <div className={styles.feed}>
         {filteredAlbums.map((album, i) => (
-          <Album album={album} key={album.id.attributes['im:id']} onAlbumSelect={onAlbumSelect} albumIndex={i} />
+          <Album
+            album={album}
+            key={album.id.attributes['im:id']}
+            onAlbumSelect={onAlbumSelect}
+            albumIndex={i}
+          />
         ))}
       </div>
     </div>

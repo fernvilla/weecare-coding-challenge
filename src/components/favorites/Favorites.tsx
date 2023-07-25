@@ -17,10 +17,12 @@ const Favorites = () => {
       <FavoritesAutoComplete />
 
       <div className={styles.favoritesList}>
-        {!favorites?.length && <p className="text-medium">No favorites added yet. Search albums above.</p>}
+        {!favorites?.length && (
+          <p className="text-medium">No favorites added yet. Search albums above.</p>
+        )}
 
         <div>
-          {favorites?.map(album => {
+          {favorites?.map((album) => {
             const image = generateImageWithSizeFromUrl(album['im:image'][0].label, 100);
 
             return (
@@ -36,7 +38,11 @@ const Favorites = () => {
                   </div>
                 </div>
 
-                <div className={styles.closeContainer} title="Remove Favorite" onClick={() => removeFavorite(album)}>
+                <div
+                  className={styles.closeContainer}
+                  title="Remove Favorite"
+                  onClick={() => removeFavorite(album)}
+                >
                   <RiCloseCircleFill size={24} />
                 </div>
               </div>

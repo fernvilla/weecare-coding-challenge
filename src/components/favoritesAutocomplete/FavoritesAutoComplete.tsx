@@ -17,7 +17,7 @@ const FavoritesAutoComplete = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const debouncedSearchTerm = useDebounce<string>(searchTerm, 500);
   const ref = useRef<HTMLDivElement | null>(null);
-  const suggestions = filteredAlbums.filter(album => !checkIfFavorite(album));
+  const suggestions = filteredAlbums.filter((album) => !checkIfFavorite(album));
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const FavoritesAutoComplete = () => {
       setFilteredAlbums([]);
     } else {
       setFilteredAlbums(
-        albums.filter(album => {
+        albums.filter((album) => {
           const artist = album['im:artist'].label;
           const albumName = album['im:name'].label;
 
@@ -48,16 +48,20 @@ const FavoritesAutoComplete = () => {
             artist.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
             albumName.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
           );
-        })
+        }),
       );
     }
   }, [albums, debouncedSearchTerm]);
 
   const handleOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowDown') {
-      setSelectedIndex(selectedIndex => (selectedIndex < suggestions.length - 1 ? selectedIndex + 1 : 0));
+      setSelectedIndex((selectedIndex) =>
+        selectedIndex < suggestions.length - 1 ? selectedIndex + 1 : 0,
+      );
     } else if (e.key === 'ArrowUp') {
-      setSelectedIndex(selectedIndex => (selectedIndex > 0 ? selectedIndex - 1 : suggestions.length - 1));
+      setSelectedIndex((selectedIndex) =>
+        selectedIndex > 0 ? selectedIndex - 1 : suggestions.length - 1,
+      );
     } else if (e.key === 'Enter') {
       if (suggestions.length > 0) {
         onFavoriteClick(suggestions[selectedIndex]);
@@ -68,7 +72,11 @@ const FavoritesAutoComplete = () => {
 
   return (
     <div className={styles.autoCompleteContainer} ref={ref}>
-      <Input onChange={e => setSearchTerm(e.target.value)} placeholder="Search Albums" onKeyDown={handleOnKeyDown} />
+      <Input
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Search Albums"
+        onKeyDown={handleOnKeyDown}
+      />
 
       {suggestions.length > 0 && (
         <div className={styles.albumSuggestions}>
@@ -81,7 +89,7 @@ const FavoritesAutoComplete = () => {
                 key={album.id.attributes['im:id']}
                 className={clsx(styles.albumSuggestion, {
                   [styles.isFavorite]: isFavorite,
-                  [styles.isSelected]: selectedIndex === i
+                  [styles.isSelected]: selectedIndex === i,
                 })}
                 onClick={() => onFavoriteClick(album)}
               >

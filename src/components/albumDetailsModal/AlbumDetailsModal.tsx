@@ -28,9 +28,11 @@ const AlbumDetailsModal = ({ album, show, onClose }: AlbumDetailsModalProps) => 
   useEffect(() => {
     const fetchAlbumSongs = async () => {
       try {
-        const res = await fetch(`https://itunes.apple.com/lookup?id=${album.id.attributes['im:id']}&entity=song`);
+        const res = await fetch(
+          `https://itunes.apple.com/lookup?id=${album.id.attributes['im:id']}&entity=song`,
+        );
         const data = (await res.json()) as AlbumSongsSearch;
-        const filteredData = data.results.filter(song => song.wrapperType === 'track');
+        const filteredData = data.results.filter((song) => song.wrapperType === 'track');
 
         setAlbumSongsData(filteredData);
       } catch (err: unknown) {
@@ -56,10 +58,16 @@ const AlbumDetailsModal = ({ album, show, onClose }: AlbumDetailsModalProps) => 
           <div>
             <h2 className={styles.albumName}>
               {album['im:name'].label}
-              <FavoriteIcon isFavorite={isFavorite} onFavoriteClick={() => onFavoriteClick(album)} size={18} />
+              <FavoriteIcon
+                isFavorite={isFavorite}
+                onFavoriteClick={() => onFavoriteClick(album)}
+                size={18}
+              />
             </h2>
             <h2 className={styles.albumArtistName}>{album['im:artist'].label}</h2>
-            <h3 className={styles.albumReleaseDate}>Released: {formatDate(album['im:releaseDate'].label)}</h3>
+            <h3 className={styles.albumReleaseDate}>
+              Released: {formatDate(album['im:releaseDate'].label)}
+            </h3>
             <h3 className={styles.albumCategory}>{album.category.attributes.label}</h3>
           </div>
 
@@ -81,7 +89,7 @@ const AlbumDetailsModal = ({ album, show, onClose }: AlbumDetailsModalProps) => 
           <div className={styles.songsContainer}>
             <h2 className={styles.songsTitle}>Songs</h2>
 
-            {albumSongsData.map(song => (
+            {albumSongsData.map((song) => (
               <div className={styles.song} key={song.trackId}>
                 <RiMusicFill />
 

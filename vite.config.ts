@@ -12,7 +12,7 @@ export default defineConfig({
     environment: 'jsdom',
     coverage: {
       provider: 'v8',
-      reporter: ['text']
-    }
-  }
+      reporter: ['text'],
+    },
+  },
 });

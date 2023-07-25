@@ -17,7 +17,7 @@ const AlbumFeedFilters = ({
   onGenreSelect,
   selectedGenres,
   selectedAlphanumeric,
-  onAlphanumericSelect
+  onAlphanumericSelect,
 }: AlbumFeedFiltersProps) => {
   const { filterOptions } = useAlbums();
   const genreOptions = filterOptions.genres;
@@ -29,11 +29,11 @@ const AlbumFeedFilters = ({
       <div className={styles.feedFilterHeader}>By Genre</div>
 
       <div className={styles.feedGenreFilters}>
-        {genreOptions.map(genre => (
+        {genreOptions.map((genre) => (
           <div
             key={genre}
             className={clsx(styles.feedGenreOption, {
-              [styles.selected]: selectedGenres.includes(genre)
+              [styles.selected]: selectedGenres.includes(genre),
             })}
             onClick={() => onGenreSelect(genre)}
           >
@@ -52,7 +52,7 @@ const AlbumFeedFilters = ({
           <Fragment key={letter}>
             <div
               className={clsx(styles.alphanumericOption, {
-                [styles.selected]: selectedAlphanumeric.includes(letter)
+                [styles.selected]: selectedAlphanumeric.includes(letter),
               })}
               onClick={() => onAlphanumericSelect(letter)}
             >
