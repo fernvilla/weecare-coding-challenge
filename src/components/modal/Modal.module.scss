@@ -1,3 +1,5 @@
+@import './../../styles/mixins/breakpoints.scss';
+
 .modal {
   position: fixed;
   z-index: 99999;
@@ -7,7 +9,11 @@
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.65);
-  padding: 0 20px;
+  padding: 0 10px;
+
+  @include sm-breakpoint {
+    padding: 0 20px;
+  }
 }
 
 .modalShow {
@@ -16,11 +22,17 @@
 
 .modalContent {
   background-color: #ffffff;
-  margin: 40px auto;
+  margin: 10px auto;
   width: 100%;
   max-width: 700px;
   position: relative;
   height: auto;
+  padding-top: 30px;
+
+  @include sm-breakpoint {
+    padding-top: 0;
+    margin: 40px auto;
+  }
 }
 
 .modalCloseContainer {
@@ -35,7 +47,7 @@
   font-weight: bold;
   transition: all 0.2s ease-in-out;
 
-  &:hover,
+  p &:hover,
   &:focus {
     opacity: 0.4;
     text-decoration: none;
