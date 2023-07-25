@@ -21,10 +21,17 @@ const FavoritesProvider = ({ children }: { children: React.ReactNode }) => {
 
     setFavorites(updatedFavorites);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedFavorites));
+
+    // Open favorites drawer if it's not open
+    if (!showFavoritesDrawer) {
+      setShowFavoritesDrawer(true);
+    }
   };
 
   const removeFavorite = (song: FavoriteSong) => {
-    const updatedFavorites = favorites.filter((favorite) => favorite.id !== song.id);
+    const updatedFavorites = favorites.filter(
+      (favorite) => favorite.id.attributes['im:id'] !== song.id.attributes['im:id'],
+    );
 
     setFavorites(updatedFavorites);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedFavorites));
