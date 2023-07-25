@@ -22,6 +22,7 @@
 
   &:hover ~ .albumSortDropdownOptions {
     display: block;
+    animation: fadeIn 0.5s;
   }
 }
 
@@ -50,5 +51,14 @@
   &:hover {
     background-color: #000000;
     color: #ffffff;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
