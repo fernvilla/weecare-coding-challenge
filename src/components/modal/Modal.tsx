@@ -1,5 +1,6 @@
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { useEffect, useRef } from 'react';
+import clsx from 'clsx';
 
 import styles from './Modal.module.scss';
 
@@ -36,11 +37,15 @@ const Modal = ({ show, onClose, children }: ModalProps) => {
     };
   }, [onClose]);
 
-  if (!show) return null;
-
   return (
     <div className={styles.modal}>
-      <div className={styles.modalContent} ref={ref}>
+      <div
+        className={clsx(styles.modalContent, {
+          [styles.modalShow]: show,
+          [styles.modalHide]: !show
+        })}
+        ref={ref}
+      >
         <div className={styles.modalCloseContainer}>
           <span className={styles.modalClose} onClick={onClose}>
             <RiCloseCircleLine />

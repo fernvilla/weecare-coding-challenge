@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { generateRandomArrayItems } from '../../utils/arrays';
 import { generateImageWithSizeFromUrl } from '../../utils/images';
 import AlbumImage from '../album/AlbumImage';
-import Button from '../button/Button';
 import { useAlbums } from '../../hooks/useAlbums';
 
 import styles from './Hero.module.scss';
@@ -14,21 +13,22 @@ const Hero = () => {
   const randomAlbums = useMemo(() => generateRandomArrayItems(albums, 3), [albums]);
   const randomAlbumsImages = randomAlbums.map(album => generateImageWithSizeFromUrl(album['im:image'][0].label, 600));
 
-  const onButtonClick = () => {
-    alert('Let the music play!');
-  };
-
   return (
     <div className={styles.hero}>
       <div className={styles.heroInnerContainer}>
         {/* Left Column */}
         <div className={styles.heroLeftColumn}>
           <div className={styles.imagesContainer}>
-            {randomAlbumsImages.map((image, i) => (
+            {randomAlbumsImages.map((image, albumIndex) => (
               <AlbumImage
                 image={image}
                 // Increase the width of each image by 25px and the right position by 40px
-                style={{ width: 250 + i * 25, position: 'absolute', right: i * 40, zIndex: i }}
+                style={{
+                  width: 250 + albumIndex * 25,
+                  position: 'absolute',
+                  right: albumIndex * 40,
+                  zIndex: albumIndex
+                }}
                 label="Album image"
                 key={image}
                 removeHover
@@ -48,8 +48,6 @@ const Hero = () => {
           <p className={styles.heroTagline}>
             Listen to the Top 100 Albums on the go <span className="text-red text-bold">Now!</span>
           </p>
-
-          <Button onClick={onButtonClick}>Get Started</Button>
         </div>
       </div>
     </div>

@@ -10,6 +10,10 @@
   padding: 0 20px;
 }
 
+.modalShow {
+  animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
 .modalContent {
   background-color: #ffffff;
   margin: 40px auto;
@@ -36,5 +40,14 @@
     opacity: 0.4;
     text-decoration: none;
     cursor: pointer;
+  }
+}
+
+@keyframes blowUpModal {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
   }
 }

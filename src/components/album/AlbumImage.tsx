@@ -18,6 +18,7 @@ const AlbumImage = ({ image, label, removeHover, style }: AlbumImageProps) => {
         [styles.hoverable]: !removeHover
       })}
       style={style}
+      loading="lazy"
     />
   );
 };

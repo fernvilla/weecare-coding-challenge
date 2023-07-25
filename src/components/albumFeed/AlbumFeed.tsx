@@ -130,8 +130,8 @@ const AlbumFeed = ({ onAlbumSelect }: AlbumFeedProps) => {
       )}
 
       <div className={styles.feed}>
-        {filteredAlbums.map(album => (
-          <Album album={album} key={album.id.attributes['im:id']} onAlbumSelect={onAlbumSelect} />
+        {filteredAlbums.map((album, i) => (
+          <Album album={album} key={album.id.attributes['im:id']} onAlbumSelect={onAlbumSelect} albumIndex={i} />
         ))}
       </div>
     </div>

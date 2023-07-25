@@ -1,3 +1,7 @@
+.album {
+  animation-name: fadeIn;
+}
+
 .albumTextContainer {
   padding: 10px 0;
 }
@@ -20,5 +24,14 @@
   &.favoriteIconActive,
   &:hover {
     color: var(--color-red);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

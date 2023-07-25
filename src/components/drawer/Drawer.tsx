@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { RiCloseCircleLine } from 'react-icons/ri';
+import clsx from 'clsx';
 
 import styles from './Drawer.module.scss';
 
@@ -17,6 +18,7 @@ const Drawer = ({ open, onClose, children }: DrawerProps) => {
     const handleClickOutside = (ev: Event) => {
       if (ref.current && !ref.current.contains(ev.target as Node)) {
         setIsOpen(false);
+        onClose?.();
       }
     };
 
@@ -35,7 +37,12 @@ const Drawer = ({ open, onClose, children }: DrawerProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className={styles.drawer} ref={ref}>
+    <div
+      className={clsx(styles.drawer, {
+        [styles.drawerOpen]: isOpen
+      })}
+      ref={ref}
+    >
       <div className={styles.drawerCloseContainer}>
         <span
           className={styles.drawerClose}

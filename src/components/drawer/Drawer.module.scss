@@ -2,7 +2,7 @@
 
 .drawer {
   position: fixed;
-  right: 0;
+  right: -500px;
   top: 0;
   height: 100vh;
   background-color: #fff;
@@ -20,6 +20,10 @@
 
   @include sm-breakpoint {
     max-width: 500px;
+  }
+
+  &.drawerOpen {
+    animation: slide 0.5s forwards;
   }
 }
 
@@ -47,4 +51,10 @@
   overflow-y: auto;
   max-height: 100vh;
   height: 100%;
+}
+
+@keyframes slide {
+  100% {
+    right: 0;
+  }
 }

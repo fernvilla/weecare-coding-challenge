@@ -10,9 +10,10 @@ import styles from './Album.module.scss';
 interface AlbumProps {
   album: AlbumEntry;
   onAlbumSelect: (album: AlbumEntry) => void;
+  albumIndex: number;
 }
 
-const Album = ({ album, onAlbumSelect }: AlbumProps) => {
+const Album = ({ album, onAlbumSelect, albumIndex }: AlbumProps) => {
   const { onFavoriteClick, checkIfFavorite } = useFavorites();
   // Increase the size of the image by replacing api width with '500x500' (double the element size)
   const image = generateImageWithSizeFromUrl(album['im:image'][0].label, 500);
@@ -24,7 +25,12 @@ const Album = ({ album, onAlbumSelect }: AlbumProps) => {
   };
 
   return (
-    <div className={styles.album} onClick={() => onAlbumSelect(album)}>
+    <div
+      className={styles.album}
+      onClick={() => onAlbumSelect(album)}
+      // Add a delay to the animation based on the album index (only for the first n albums)
+      style={{ animationDuration: `${albumIndex <= 6 ? albumIndex * 0.5 : 3.5}s` }}
+    >
       <AlbumImage image={image} label={album.title.label} />
 
       <div className={styles.albumTextContainer}>
