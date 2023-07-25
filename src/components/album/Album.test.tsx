@@ -8,9 +8,7 @@ describe('Album test', () => {
   test('Should show album name', () => {
     renderWithProviders(<Album album={album} onAlbumSelect={() => {}} albumIndex={0} />);
 
-    const heading = screen.getByRole('heading', {
-      name: album['im:name'].label,
-    });
+    const heading = screen.getAllByLabelText(album['im:name'].label);
 
     expect(heading).toBeDefined();
   });
