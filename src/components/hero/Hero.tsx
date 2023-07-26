@@ -25,7 +25,7 @@ const Hero = () => {
               <AlbumImage
                 image={image}
                 // Increase the width of each image by 25px and the right position by 40px
-                style={{
+                containerStyles={{
                   width: 250 + albumIndex * 25,
                   position: 'absolute',
                   right: albumIndex * 40,

@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useState } from 'react';
 
 import styles from './AlbumImage.module.scss';
 
@@ -6,21 +7,34 @@ interface AlbumImageProps {
   image: string;
   label: string;
   removeHover?: boolean;
-  style?: React.CSSProperties;
+  containerStyles?: React.CSSProperties;
   loading?: 'lazy' | 'eager';
+  imageStyles?: React.CSSProperties;
 }
 
-const AlbumImage = ({ image, label, removeHover, style, loading = 'lazy' }: AlbumImageProps) => {
+const AlbumImage = ({
+  image,
+  label,
+  removeHover,
+  containerStyles,
+  loading = 'lazy',
+}: AlbumImageProps) => {
+  const [loaded, setLoaded] = useState(false);
+
   return (
-    <img
-      src={image}
-      alt={label}
-      className={clsx(styles.albumImage, {
-        [styles.hoverable]: !removeHover,
-      })}
-      style={style}
-      loading={loading}
-    />
+    <div className={styles.imageContainer} style={containerStyles}>
+      {!loaded && <div className={styles.imagePlaceholder} />}
+
+      <img
+        src={image}
+        alt={label}
+        className={clsx(styles.albumImage, {
+          [styles.hoverable]: !removeHover,
+        })}
+        loading={loading}
+        onLoad={() => setLoaded(true)}
+      />
+    </div>
   );
 };
 

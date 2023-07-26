@@ -1,3 +1,28 @@
+.imageContainer {
+  position: relative;
+  flex: none;
+}
+
+.imagePlaceholder {
+  background-image: linear-gradient(
+    to left,
+    rgba(251, 251, 251, 0.05),
+    rgba(251, 251, 251, 0.3),
+    rgba(251, 251, 251, 0.6),
+    rgba(251, 251, 251, 0.3),
+    rgba(251, 251, 251, 0.05)
+  );
+  position: absolute;
+  top: 0;
+  left: -45%;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  animation: loading 1s infinite;
+}
+
 .albumImage {
   box-shadow:
     rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
@@ -10,5 +35,14 @@
     &:hover {
       transform: scale(1.1);
     }
+  }
+}
+
+@keyframes loading {
+  0% {
+    left: -45%;
+  }
+  100% {
+    left: 100%;
   }
 }
