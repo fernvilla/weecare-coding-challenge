@@ -7,6 +7,7 @@ import AlbumImage from '../album/AlbumImage';
 import { generateImageWithSizeFromUrl } from '../../utils/images';
 import { useFavorites } from '../../hooks/useFavorites';
 import clsx from 'clsx';
+import useOnClickOutside from '../../hooks/useOnclickOutside';
 
 import styles from './FavoritesAutoComplete.module.scss';
 
@@ -20,20 +21,7 @@ const FavoritesAutoComplete = () => {
   const suggestions = filteredAlbums.filter((album) => !checkIfFavorite(album));
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
-  useEffect(() => {
-    const handleClickOutside = (ev: Event) => {
-      if (ref.current && !ref.current.contains(ev.target as Node)) {
-        setFilteredAlbums([]);
-      }
-    };
-
-    // Handle click outside menu
-    document.addEventListener('click', handleClickOutside, true);
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  }, []);
+  useOnClickOutside(ref, () => setFilteredAlbums([]));
 
   // Filter albums by search term
   useEffect(() => {

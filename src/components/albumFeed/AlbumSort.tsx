@@ -1,6 +1,7 @@
 import { RiArrowDropDownLine } from 'react-icons/ri';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import clsx from 'clsx';
+import useOnClickOutside from '../../hooks/useOnclickOutside';
 
 import styles from './AlbumSort.module.scss';
 
@@ -28,20 +29,7 @@ const AlbumSort = ({ onSortChange, selectedSort }: AlbumSortProps) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (ev: Event) => {
-      if (ref.current && !ref.current.contains(ev.target as Node)) {
-        setShowDropdown(false);
-      }
-    };
-
-    // Handle click outside drawer
-    document.addEventListener('click', handleClickOutside, true);
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  }, []);
+  useOnClickOutside(ref, () => setShowDropdown(false));
 
   return (
     <div className={styles.albumSort}>

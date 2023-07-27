@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import clsx from 'clsx';
+import useOnClickOutside from '../../hooks/useOnclickOutside';
 
 import styles from './Drawer.module.scss';
 
@@ -14,21 +15,10 @@ const Drawer = ({ open, onClose, children }: DrawerProps) => {
   const [isOpen, setIsOpen] = useState(open || false);
   const ref = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (ev: Event) => {
-      if (ref.current && !ref.current.contains(ev.target as Node)) {
-        setIsOpen(false);
-        onClose?.();
-      }
-    };
-
-    // Handle click outside drawer
-    document.addEventListener('click', handleClickOutside, true);
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  }, [onClose]);
+  useOnClickOutside(ref, () => {
+    setIsOpen(false);
+    onClose?.();
+  });
 
   useEffect(() => {
     setIsOpen(open);
