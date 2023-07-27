@@ -22,7 +22,12 @@ const AlbumImage = ({
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className={styles.imageContainer} style={containerStyles}>
+    <div
+      className={clsx(styles.imageContainer, {
+        [styles.loaded]: loaded,
+      })}
+      style={containerStyles}
+    >
       {!loaded && <div className={styles.imagePlaceholder} />}
 
       <img
