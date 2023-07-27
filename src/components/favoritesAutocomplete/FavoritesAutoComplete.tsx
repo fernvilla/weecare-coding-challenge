@@ -7,7 +7,7 @@ import AlbumImage from '../album/AlbumImage';
 import { generateImageWithSizeFromUrl } from '../../utils/images';
 import { useFavorites } from '../../hooks/useFavorites';
 import clsx from 'clsx';
-import useOnClickOutside from '../../hooks/useOnclickOutside';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 
 import styles from './FavoritesAutoComplete.module.scss';
 

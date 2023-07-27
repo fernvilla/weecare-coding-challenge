@@ -1,7 +1,7 @@
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { useRef, useState } from 'react';
 import clsx from 'clsx';
-import useOnClickOutside from '../../hooks/useOnclickOutside';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 
 import styles from './AlbumSort.module.scss';
 
